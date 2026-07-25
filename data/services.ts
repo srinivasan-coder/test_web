@@ -1,0 +1,208 @@
+import type { Service } from "@/types";
+
+export const services: Service[] = [
+  {
+    id: "wedding",
+    slug: "wedding",
+    title: "Wedding Photography",
+    summary: "Timeless, unobtrusive coverage of your day.",
+    description:
+      "A calm, documentary approach to weddings — we capture the honest, in-between moments alongside the milestones, delivering a gallery you'll return to for a lifetime.",
+    icon: "Heart",
+    image: {
+      src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80",
+      alt: "Bride and groom embracing during golden hour",
+      width: 1800,
+      height: 1200,
+    },
+    includes: [
+      "Full-day coverage with two photographers",
+      "Engagement or welcome-dinner mini session",
+      "500+ professionally edited images",
+      "Private online gallery with print store",
+      "Highlight film teaser (optional add-on)",
+    ],
+    highlights: [
+      "Lead + second shooter",
+      "Timeline consultation",
+      "Heirloom print credit",
+      "Next-day sneak peek",
+    ],
+    startingPrice: 3200,
+    currency: "USD",
+    priceLabel: "Starting from",
+    galleryHref: "/portfolio?category=wedding",
+    featured: true,
+  },
+  {
+    id: "pre-wedding",
+    slug: "pre-wedding",
+    title: "Pre Wedding",
+    summary: "A romantic chapter before the vows.",
+    description:
+      "Story-led pre-wedding sessions designed around your places and pace — soft light, natural movement, and frames that feel like film stills from your own love story.",
+    icon: "Sparkles",
+    image: {
+      src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1800&q=80",
+      alt: "Couple during a romantic pre-wedding session",
+      width: 1800,
+      height: 1200,
+    },
+    includes: [
+      "2–3 hour creative session",
+      "Location scouting & planning",
+      "Outfit guidance for two looks",
+      "80+ edited high-resolution images",
+      "Online gallery within 10 days",
+    ],
+    highlights: [
+      "Golden-hour priority",
+      "Cinematic color grade",
+      "Travel within 50 miles included",
+      "Print-ready files",
+    ],
+    startingPrice: 950,
+    currency: "USD",
+    priceLabel: "Starting from",
+    galleryHref: "/portfolio?category=pre-wedding",
+    featured: true,
+  },
+  {
+    id: "baby",
+    slug: "baby",
+    title: "Baby Shoot",
+    summary: "Gentle newborn and milestone portraiture.",
+    description:
+      "Unhurried baby sessions paced around rest and comfort. Soft natural light, patient posing, and heirloom frames of the smallest details — tiny hands, quiet smiles, first light.",
+    icon: "Baby",
+    image: {
+      src: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1800&q=80",
+      alt: "Sleeping newborn wrapped in soft linen",
+      width: 1800,
+      height: 1200,
+    },
+    includes: [
+      "Studio or in-home session (up to 3 hours)",
+      "Parent & sibling portraits included",
+      "Safety-first posing & wraps",
+      "40+ edited images",
+      "Heirloom print guide",
+    ],
+    highlights: [
+      "Climate-controlled studio option",
+      "Soft, timeless retouching",
+      "Flexible feeding breaks",
+      "Family album credit",
+    ],
+    startingPrice: 550,
+    currency: "USD",
+    priceLabel: "Starting from",
+    galleryHref: "/portfolio?category=baby",
+    featured: true,
+  },
+  {
+    id: "corporate",
+    slug: "corporate",
+    title: "Corporate",
+    summary: "Polished imagery for teams and brands.",
+    description:
+      "Executive headshots, team photography, and brand campaigns with clean light and approachable confidence — built for LinkedIn, annual reports, and modern websites.",
+    icon: "Building2",
+    image: {
+      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1800&q=80",
+      alt: "Professional corporate headshot in natural light",
+      width: 1800,
+      height: 1200,
+    },
+    includes: [
+      "On-site or studio production",
+      "Consistent lighting across the team",
+      "Wardrobe & framing guidance",
+      "Retouched selects with commercial license",
+      "Same-week turnaround available",
+    ],
+    highlights: [
+      "Brand style guide alignment",
+      "Multi-look packages",
+      "Office or location",
+      "Usage rights included",
+    ],
+    startingPrice: 1200,
+    currency: "USD",
+    priceLabel: "Starting from",
+    galleryHref: "/portfolio?category=corporate",
+    featured: true,
+  },
+  {
+    id: "fashion",
+    slug: "fashion",
+    title: "Fashion",
+    summary: "Editorial and campaign imagery with presence.",
+    description:
+      "Lookbooks, editorials, and campaign work shaped by silhouette, texture, and decisive light — collaborative productions that feel magazine-ready without losing warmth.",
+    icon: "Camera",
+    image: {
+      src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1800&q=80",
+      alt: "Fashion model in an editorial pose",
+      width: 1800,
+      height: 1200,
+    },
+    includes: [
+      "Creative direction & shot list",
+      "Half or full-day studio / location",
+      "Styling collaboration",
+      "High-end retouching on hero selects",
+      "Web & print-ready deliverables",
+    ],
+    highlights: [
+      "Art direction included",
+      "Moodboard workshop",
+      "Model & talent coordination support",
+      "Flexible licensing",
+    ],
+    startingPrice: 1800,
+    currency: "USD",
+    priceLabel: "Starting from",
+    galleryHref: "/portfolio?category=fashion",
+    featured: true,
+  },
+  {
+    id: "product",
+    slug: "product",
+    title: "Product Photography",
+    summary: "Considered stills that sell with restraint.",
+    description:
+      "Clean, directional product photography for e-commerce, packaging, and campaigns — precise color, thoughtful composition, and files ready for every channel.",
+    icon: "Package",
+    image: {
+      src: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1800&q=80",
+      alt: "Luxury product still life photography",
+      width: 1800,
+      height: 1200,
+    },
+    includes: [
+      "Studio packshot & lifestyle options",
+      "Color-accurate tethered capture",
+      "Set design & surface styling",
+      "Retouched e-commerce set",
+      "Commercial usage license",
+    ],
+    highlights: [
+      "Amazon / Shopify ready crops",
+      "Consistent catalog lighting",
+      "Ghost mannequin available",
+      "Rush delivery options",
+    ],
+    startingPrice: 850,
+    currency: "USD",
+    priceLabel: "Starting from",
+    galleryHref: "/portfolio?category=fashion",
+    featured: true,
+  },
+];
+
+export const featuredServices = services.filter((s) => s.featured);
+
+export function getServiceBySlug(slug: string): Service | undefined {
+  return services.find((s) => s.slug === slug);
+}

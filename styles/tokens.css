@@ -1,0 +1,87 @@
+/* -------------------------------------------------------------------------- */
+/*  Design Tokens — Aperture Studio                                           */
+/*  Single source of truth for color, radius, elevation, and layout.          */
+/*  Mapped into Tailwind via @theme in app/globals.css.                       */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  /* Brand palette */
+  --color-white: #ffffff;
+  --color-surface: #f8f8fa;
+  --color-ink: #111827;
+  --color-slate: #6b7280;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-line: #e5e7eb;
+
+  /* Semantic tokens (shadcn/ui compatible) */
+  --background: var(--color-white);
+  --foreground: var(--color-ink);
+
+  --card: var(--color-white);
+  --card-foreground: var(--color-ink);
+
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-ink);
+
+  --primary: var(--color-accent);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--color-surface);
+  --secondary-foreground: var(--color-ink);
+
+  --muted: var(--color-surface);
+  --muted-foreground: var(--color-slate);
+
+  /* Surface tint for quiet interactive fills (not brand blue) */
+  --accent: var(--color-surface);
+  --accent-foreground: var(--color-ink);
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--color-line);
+  --input: var(--color-line);
+  --ring: var(--color-accent);
+
+  /* Radius scale (base 16px) */
+  --radius: 1rem;
+
+  /* Elevation — softer, more refined Apple-like depth */
+  --shadow-xs: 0 1px 2px 0 rgb(17 24 39 / 0.03);
+  --shadow-sm: 0 1px 2px 0 rgb(17 24 39 / 0.04), 0 1px 3px -1px rgb(17 24 39 / 0.05);
+  --shadow-md: 0 4px 16px -4px rgb(17 24 39 / 0.08), 0 2px 6px -2px rgb(17 24 39 / 0.04);
+  --shadow-lg: 0 16px 40px -12px rgb(17 24 39 / 0.12), 0 8px 16px -8px rgb(17 24 39 / 0.06);
+  --shadow-xl: 0 28px 64px -16px rgb(17 24 39 / 0.14), 0 12px 24px -12px rgb(17 24 39 / 0.08);
+
+  /* Layout — 8px grid */
+  --header-height: 4.5rem;
+  --container-content: 80rem;
+  --gutter: 1.5rem;
+  --section-y: 5rem;
+  --section-y-md: 7rem;
+  --section-y-lg: 8rem;
+  --section-y-tight: 2.5rem;
+  --section-y-band: 4rem;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 350ms;
+  --duration-slow: 550ms;
+  --duration-reveal: 700ms;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2rem;
+    --section-y-tight: 3.5rem;
+    --section-y-band: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 2.5rem;
+  }
+}

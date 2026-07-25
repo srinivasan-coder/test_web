@@ -1,0 +1,338 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "../styles/tokens.css";
+
+/* -------------------------------------------------------------------------- */
+/*  Aperture Studio — Global Theme                                            */
+/*  Apple-inspired minimal system: generous whitespace, subtle shadows,       */
+/*  16px radii, restrained palette, no gradients.                             */
+/* -------------------------------------------------------------------------- */
+
+@custom-variant dark (&:is(.dark *));
+
+/* -------------------------------------------------------------------------- */
+/*  Tailwind theme mapping (v4)                                                */
+/* -------------------------------------------------------------------------- */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand aliases */
+  --color-surface: var(--color-surface);
+  --color-ink: var(--color-ink);
+  --color-slate: var(--color-slate);
+  --color-brand: var(--color-accent);
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman",
+    serif;
+
+  /* Radius scale */
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 8px);
+  --radius-2xl: calc(var(--radius) + 16px);
+
+  /* Shadows */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* Content width */
+  --container-content: 80rem;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-in: fade-in 0.55s var(--ease-out-soft) both;
+  --animate-skeleton: skeleton-pulse 1.6s var(--ease-out-soft) infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Base layer                                                                 */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-height) + 0.5rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif tracking-tight text-foreground;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-accent) 16%, transparent);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Refined scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-line);
+    border-radius: 9999px;
+    border: 3px solid var(--background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-slate);
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Reusable utilities                                                         */
+/* -------------------------------------------------------------------------- */
+
+@layer utilities {
+  /* Frosted-glass surface for the sticky navbar */
+  .glass {
+    background-color: color-mix(in srgb, var(--background) 76%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Eyebrow / kicker label used above section headings */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-primary sm:text-xs;
+  }
+
+  /* Typography scale — intentional hierarchy */
+  .type-display {
+    @apply font-serif text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl;
+  }
+
+  .type-title {
+    @apply font-serif text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl;
+  }
+
+  .type-headline {
+    @apply font-serif text-2xl font-semibold leading-snug tracking-tight sm:text-3xl;
+  }
+
+  .type-body {
+    @apply text-base leading-relaxed text-muted-foreground sm:text-lg;
+  }
+
+  .type-caption {
+    @apply text-sm leading-relaxed text-muted-foreground;
+  }
+
+  /* Consistent section vertical rhythm (8px grid) */
+  .section-y {
+    padding-block: var(--section-y);
+  }
+
+  @media (min-width: 768px) {
+    .section-y {
+      padding-block: var(--section-y-md);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-y {
+      padding-block: var(--section-y-lg);
+    }
+  }
+
+  /* Tighter top after a page header */
+  .section-y-tight {
+    padding-block: var(--section-y);
+    padding-top: var(--section-y-tight);
+  }
+
+  @media (min-width: 768px) {
+    .section-y-tight {
+      padding-bottom: var(--section-y-md);
+      padding-top: var(--section-y-tight);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-y-tight {
+      padding-bottom: var(--section-y-lg);
+    }
+  }
+
+  /* Compact band (stats, ratings) */
+  .section-y-band {
+    padding-block: var(--section-y-band);
+  }
+
+  /* Hide scrollbar (used by carousels / chip rows) */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Edge fade for horizontal chip scrollers */
+  .fade-x {
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 1.25rem,
+      #000 calc(100% - 1.25rem),
+      transparent
+    );
+  }
+
+  @media (min-width: 640px) {
+    .fade-x {
+      mask-image: none;
+    }
+  }
+
+  /* Soft card lift fallback for non-motion contexts */
+  .card-lift {
+    transition:
+      transform var(--duration-slow) var(--ease-out-soft),
+      box-shadow var(--duration-slow) var(--ease-out-soft);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .card-lift:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Bottom image scrim for legibility without muting the photo */
+  .media-scrim {
+    background-color: rgb(17 24 39 / 0);
+    transition: background-color var(--duration-slow) var(--ease-out-soft);
+  }
+  .media-scrim::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 55%;
+    background-color: rgb(17 24 39 / 0.48);
+    pointer-events: none;
+  }
+  .group:hover .media-scrim,
+  .group:focus-visible .media-scrim {
+    background-color: rgb(17 24 39 / 0.18);
+  }
+
+  .skeleton {
+    @apply rounded-2xl bg-secondary;
+    animation: skeleton-pulse 1.6s var(--ease-out-soft) infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-lift,
+    .card-lift:hover {
+      transition: none;
+      transform: none;
+    }
+
+    .skeleton {
+      animation: none;
+    }
+  }
+}
