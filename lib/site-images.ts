@@ -1,5 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { readJsonBlob, writeJsonBlob } from "@/lib/blob-store";
 
 import type { Gallery } from "@/types/gallery";
 import type { TeamMember } from "@/types/team";
@@ -10,7 +9,7 @@ import type { Service } from "@/types/service";
 import type { PortfolioCategory } from "@/types/portfolio";
 import type { StudioStory } from "@/types/about";
 
-const FILE = path.join(process.cwd(), "data", "db", "site-images.json");
+const MANIFEST_PATHNAME = "data-db/site-images.json";
 
 type Override = { path: string; updatedAt: number };
 type Overrides = Record<string, Override>;
@@ -20,35 +19,25 @@ function key(section: string, slotId: string): string {
 }
 
 async function readOverrides(): Promise<Overrides> {
-  try {
-    const raw = await readFile(FILE, "utf-8");
-    const parsed = JSON.parse(raw);
-    return typeof parsed === "object" && parsed !== null ? parsed : {};
-  } catch {
-    return {};
-  }
+  return readJsonBlob<Overrides>(MANIFEST_PATHNAME, {});
 }
 
-/** All current overrides — one file read, reused across a whole page render. */
+/** All current overrides — one Blob read, reused across a whole page render. */
 export async function getImageOverrides(): Promise<Overrides> {
   return readOverrides();
 }
 
 function resolve(overrides: Overrides, section: string, slotId: string, fallbackPath: string): string {
-  const override = overrides[key(section, slotId)];
-  if (!override) return fallbackPath;
-  // The file path itself stays fixed (reusing a path Next's dev server has
-  // already served avoids a dev-mode race on brand-new files), but the URL
-  // still needs to change per update — otherwise Next's own server-side
-  // image-optimization cache keeps serving the old cached render even after
-  // the source file changes. A version query does that without touching disk.
-  return `${override.path}?v=${override.updatedAt}`;
+  // Overrides are Blob URLs, which Blob already gives a fresh, unique URL
+  // per upload — no cache-busting query needed, unlike the old local-file
+  // path which had to reuse a fixed filename.
+  return overrides[key(section, slotId)]?.path ?? fallbackPath;
 }
 
 export async function setImageOverride(section: string, slotId: string, filePath: string): Promise<void> {
   const overrides = await readOverrides();
   overrides[key(section, slotId)] = { path: filePath, updatedAt: Date.now() };
-  await writeFile(FILE, JSON.stringify(overrides, null, 2));
+  await writeJsonBlob(MANIFEST_PATHNAME, overrides);
 }
 
 /** Resolves a single fixed-slot image (hero, cta, about studio story). */

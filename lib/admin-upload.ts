@@ -1,5 +1,4 @@
-import { mkdir, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { put } from "@vercel/blob";
 
 const MAX_BYTES = 10 * 1024 * 1024; // 10MB
 const EXT_BY_MIME: Record<string, string> = {
@@ -7,20 +6,19 @@ const EXT_BY_MIME: Record<string, string> = {
   "image/png": ".png",
   "image/webp": ".webp",
 };
-const ASSETS_ROOT = path.join(process.cwd(), "public", "assets");
 
 export class UploadValidationError extends Error {}
 
 /**
- * Validates and writes an uploaded image to public/assets/<relativePath>.
- * The extension on `relativePath` is a naming hint only — the file is always
- * saved with the extension matching its ACTUAL content type, so a PNG never
- * ends up mislabeled as ".jpg" (which breaks decoding for some viewers since
- * the server would advertise the wrong Content-Type for it).
+ * Validates an uploaded image and stores it in Vercel Blob, returning its
+ * public URL. `pathnameHint` is a naming/organization hint only (e.g.
+ * "team/amara-osei.jpg") — the extension is always corrected to match the
+ * file's ACTUAL content type, and Blob appends a random suffix so every
+ * upload gets a fresh URL (no stale-cache workarounds needed downstream).
  */
 export async function saveUploadedImage(
   file: FormDataEntryValue | null | undefined,
-  relativePath: string,
+  pathnameHint: string,
 ): Promise<string> {
   if (!(file instanceof File)) {
     throw new UploadValidationError("No file provided");
@@ -33,11 +31,14 @@ export async function saveUploadedImage(
     throw new UploadValidationError("Image must be 10MB or smaller");
   }
 
-  const finalRelativePath = relativePath.replace(/\.[^./]+$/, "") + correctExt;
-  const destination = path.join(ASSETS_ROOT, finalRelativePath);
-  await mkdir(path.dirname(destination), { recursive: true });
-  await writeFile(destination, Buffer.from(await file.arrayBuffer()));
-  return `/assets/${finalRelativePath}`;
+  const pathname = pathnameHint.replace(/\.[^./]+$/, "") + correctExt;
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const blob = await put(pathname, buffer, {
+    access: "public",
+    contentType: file.type,
+    addRandomSuffix: true,
+  });
+  return blob.url;
 }
 
 export function parseTags(value: FormDataEntryValue | null): string[] | undefined {

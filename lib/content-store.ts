@@ -1,5 +1,4 @@
-import { readFile, writeFile } from "node:fs/promises";
-import path from "node:path";
+import { readJsonBlob, writeJsonBlob } from "@/lib/blob-store";
 
 import { galleries as seedGalleries } from "@/data/gallery";
 import { team as seedTeam } from "@/data/team";
@@ -20,22 +19,14 @@ import type { Review } from "@/types/review";
 import type { InstagramPost } from "@/types/instagram";
 import type { BlogPost } from "@/types/blog";
 
-const DB_DIR = path.join(process.cwd(), "data", "db");
-
 async function readStore<T>(file: string): Promise<T[]> {
-  try {
-    const raw = await readFile(path.join(DB_DIR, file), "utf-8");
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as T[]) : [];
-  } catch {
-    return [];
-  }
+  return readJsonBlob<T[]>(`data-db/${file}`, []);
 }
 
 async function appendToStore<T extends { id: string }>(file: string, item: T): Promise<void> {
   const existing = await readStore<T>(file);
   existing.push(item);
-  await writeFile(path.join(DB_DIR, file), JSON.stringify(existing, null, 2));
+  await writeJsonBlob(`data-db/${file}`, existing);
 }
 
 /** Turns "A New Gallery!" into "a-new-gallery", de-duped against a list of taken slugs. */
