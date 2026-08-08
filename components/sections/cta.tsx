@@ -6,19 +6,19 @@ import { CTAButton } from "@/components/ui/cta-button";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { fadeInUp } from "@/lib/animations";
-
-const CTA_IMAGE =
-  "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=2200&q=80";
+import { resolveSingleImage } from "@/lib/site-images";
 
 /**
  * Full-bleed closing CTA — edge-to-edge photography, clear conversion.
  */
-export function CallToAction() {
+export async function CallToAction() {
+  const src = await resolveSingleImage("cta", "banner", "/assets/cta/banner.jpg");
+
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src={CTA_IMAGE}
+          src={src}
           alt="Couple walking hand in hand through soft evening light"
           fill
           sizes="100vw"

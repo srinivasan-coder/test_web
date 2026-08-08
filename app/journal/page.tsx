@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 
 import { PageHeader } from "@/components/ui/page-header";
 import { ExplorerSkeleton } from "@/components/ui/skeleton";
-import { blogPosts } from "@/data/blog";
+import { getAllBlogPosts } from "@/lib/content-store";
 import { SITE_CONFIG } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+
+// Reads data/db/blog.json at request time — must stay dynamic so newly
+// added posts appear without a rebuild.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: "Journal",
@@ -13,13 +17,15 @@ export const metadata: Metadata = buildMetadata({
   path: "/journal",
 });
 
-const BlogExplorer = dynamic(
+const BlogExplorer = nextDynamic(
   () =>
     import("@/components/blog/blog-explorer").then((mod) => mod.BlogExplorer),
   { loading: () => <ExplorerSkeleton variant="cards" /> },
 );
 
-export default function JournalPage() {
+export default async function JournalPage() {
+  const blogPosts = await getAllBlogPosts();
+
   return (
     <>
       <PageHeader

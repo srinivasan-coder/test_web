@@ -25,20 +25,20 @@ export const galleries: Gallery[] = [
     featured: true,
     tags: ["wedding", "coastal", "golden hour"],
     cover: img(
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/a-still-morning/cover.jpg",
       "Couple embracing at sunset on their wedding day",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/a-still-morning/1.jpg",
         "Couple embracing at sunset on their wedding day",
       ),
       img(
-        "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/a-still-morning/2.jpg",
         "Bride holding a cascading bouquet",
       ),
       img(
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/a-still-morning/3.jpg",
         "Wedding table details with florals",
         1600,
         1067,
@@ -59,20 +59,20 @@ export const galleries: Gallery[] = [
     featured: true,
     tags: ["wedding", "garden", "ceremony"],
     cover: img(
-      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80",
+      "/assets/gallery/vows-in-linen/cover.jpg",
       "Wedding ceremony aisle lined with flowers",
       1600,
       1067,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/vows-in-linen/1.jpg",
         "Wedding ceremony aisle lined with flowers",
         1600,
         1067,
       ),
       img(
-        "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/vows-in-linen/2.jpg",
         "Couple dancing at their reception",
       ),
     ],
@@ -89,12 +89,12 @@ export const galleries: Gallery[] = [
     date: "2025-10-04",
     tags: ["wedding", "reception", "evening"],
     cover: img(
-      "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/midnight-reception/cover.jpg",
       "Evening wedding reception under warm lights",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/midnight-reception/1.jpg",
         "Evening wedding reception under warm lights",
       ),
     ],
@@ -113,16 +113,16 @@ export const galleries: Gallery[] = [
     featured: true,
     tags: ["engagement", "city", "couples"],
     cover: img(
-      "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/city-promise/cover.jpg",
       "Engaged couple walking hand in hand outdoors",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/city-promise/1.jpg",
         "Engaged couple walking hand in hand outdoors",
       ),
       img(
-        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/city-promise/2.jpg",
         "Couple sharing a quiet moment together",
       ),
     ],
@@ -139,14 +139,14 @@ export const galleries: Gallery[] = [
     date: "2026-01-30",
     tags: ["engagement", "waterfront"],
     cover: img(
-      "https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1600&q=80",
+      "/assets/gallery/harbor-light/cover.jpg",
       "Couple standing by the water at dusk",
       1600,
       1067,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/harbor-light/1.jpg",
         "Couple standing by the water at dusk",
         1600,
         1067,
@@ -165,14 +165,14 @@ export const galleries: Gallery[] = [
     date: "2025-09-14",
     tags: ["engagement", "golden hour"],
     cover: img(
-      "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/golden-hour-yes/cover.jpg",
       "Couple embracing during golden hour",
       1200,
       1200,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/golden-hour-yes/1.jpg",
         "Couple embracing during golden hour",
         1200,
         1200,
@@ -193,16 +193,16 @@ export const galleries: Gallery[] = [
     featured: true,
     tags: ["pre-wedding", "romantic"],
     cover: img(
-      "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/before-the-aisle/cover.jpg",
       "Couple posing for a pre-wedding portrait",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/before-the-aisle/1.jpg",
         "Couple posing for a pre-wedding portrait",
       ),
       img(
-        "https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/before-the-aisle/2.jpg",
         "Romantic couple portrait outdoors",
       ),
     ],
@@ -219,14 +219,14 @@ export const galleries: Gallery[] = [
     date: "2025-11-21",
     tags: ["pre-wedding", "desert"],
     cover: img(
-      "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=1600&q=80",
+      "/assets/gallery/desert-duet/cover.jpg",
       "Couple in an open landscape during a pre-wedding shoot",
       1600,
       1067,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/desert-duet/1.jpg",
         "Couple in an open landscape during a pre-wedding shoot",
         1600,
         1067,
@@ -247,16 +247,16 @@ export const galleries: Gallery[] = [
     featured: true,
     tags: ["baby", "newborn", "studio"],
     cover: img(
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/soft-beginnings/cover.jpg",
       "Sleeping newborn wrapped in soft linen",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/soft-beginnings/1.jpg",
         "Sleeping newborn wrapped in soft linen",
       ),
       img(
-        "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/soft-beginnings/2.jpg",
         "Parent holding a newborn baby",
       ),
     ],
@@ -273,14 +273,14 @@ export const galleries: Gallery[] = [
     date: "2025-12-02",
     tags: ["baby", "lifestyle", "family"],
     cover: img(
-      "https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/first-light/cover.jpg",
       "Baby smiling during a lifestyle portrait session",
       1200,
       1200,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1544126592-807ade215a0b?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/first-light/1.jpg",
         "Baby smiling during a lifestyle portrait session",
         1200,
         1200,
@@ -299,14 +299,14 @@ export const galleries: Gallery[] = [
     date: "2025-08-19",
     tags: ["baby", "details"],
     cover: img(
-      "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1600&q=80",
+      "/assets/gallery/tiny-toes/cover.jpg",
       "Close-up of a baby's feet",
       1600,
       1067,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/tiny-toes/1.jpg",
         "Close-up of a baby's feet",
         1600,
         1067,
@@ -327,16 +327,16 @@ export const galleries: Gallery[] = [
     featured: true,
     tags: ["corporate", "headshot", "brand"],
     cover: img(
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/boardroom-calm/cover.jpg",
       "Professional corporate headshot in natural light",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/boardroom-calm/1.jpg",
         "Professional corporate headshot in natural light",
       ),
       img(
-        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/boardroom-calm/2.jpg",
         "Corporate portrait of a professional woman",
       ),
     ],
@@ -354,14 +354,14 @@ export const galleries: Gallery[] = [
     date: "2025-11-03",
     tags: ["corporate", "team", "office"],
     cover: img(
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
+      "/assets/gallery/team-in-motion/cover.jpg",
       "Creative team collaborating in a bright office",
       1600,
       1067,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/team-in-motion/1.jpg",
         "Creative team collaborating in a bright office",
         1600,
         1067,
@@ -380,12 +380,12 @@ export const galleries: Gallery[] = [
     date: "2025-07-16",
     tags: ["corporate", "founder", "portrait"],
     cover: img(
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/founder-series/cover.jpg",
       "Founder portrait in a modern workspace",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/founder-series/1.jpg",
         "Founder portrait in a modern workspace",
       ),
     ],
@@ -404,16 +404,16 @@ export const galleries: Gallery[] = [
     featured: true,
     tags: ["fashion", "editorial", "studio"],
     cover: img(
-      "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/atelier-lines/cover.jpg",
       "Fashion model in an editorial pose",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/atelier-lines/1.jpg",
         "Fashion model in an editorial pose",
       ),
       img(
-        "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/atelier-lines/2.jpg",
         "High-fashion portrait with dramatic lighting",
       ),
     ],
@@ -430,14 +430,14 @@ export const galleries: Gallery[] = [
     date: "2025-09-27",
     tags: ["fashion", "lookbook"],
     cover: img(
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80",
+      "/assets/gallery/runway-hush/cover.jpg",
       "Fashion shopping and styling moment",
       1600,
       1067,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/runway-hush/1.jpg",
         "Fashion shopping and styling moment",
         1600,
         1067,
@@ -456,12 +456,12 @@ export const galleries: Gallery[] = [
     date: "2025-06-11",
     tags: ["fashion", "black and white"],
     cover: img(
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/monochrome-muse/cover.jpg",
       "Fashion model in a striking editorial look",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/monochrome-muse/1.jpg",
         "Fashion model in a striking editorial look",
       ),
     ],
@@ -478,12 +478,12 @@ export const galleries: Gallery[] = [
     date: "2025-05-03",
     tags: ["wedding", "bridal"],
     cover: img(
-      "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/ivory-afternoon/cover.jpg",
       "Bride in a white gown during golden light",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/ivory-afternoon/1.jpg",
         "Bride in a white gown during golden light",
       ),
     ],
@@ -500,12 +500,12 @@ export const galleries: Gallery[] = [
     date: "2025-04-20",
     tags: ["engagement", "rain", "candid"],
     cover: img(
-      "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/ring-and-rain/cover.jpg",
       "Couple laughing together during an engagement shoot",
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/ring-and-rain/1.jpg",
         "Couple laughing together during an engagement shoot",
       ),
     ],
@@ -523,14 +523,14 @@ export const galleries: Gallery[] = [
     date: "2026-04-01",
     tags: ["fashion", "campaign"],
     cover: img(
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1600&q=80",
+      "/assets/gallery/silk-and-steel/cover.jpg",
       "Fashion model walking in an outdoor editorial",
       1600,
       1067,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1600&q=80",
+        "/assets/gallery/silk-and-steel/1.jpg",
         "Fashion model walking in an outdoor editorial",
         1600,
         1067,
@@ -550,14 +550,14 @@ export const galleries: Gallery[] = [
     date: "2026-03-15",
     tags: ["corporate", "annual report"],
     cover: img(
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1200&q=80",
+      "/assets/gallery/summit-portraits/cover.jpg",
       "Corporate leadership portrait",
       1200,
       1200,
     ),
     images: [
       img(
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=1200&q=80",
+        "/assets/gallery/summit-portraits/1.jpg",
         "Corporate leadership portrait",
         1200,
         1200,

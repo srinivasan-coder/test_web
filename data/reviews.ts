@@ -16,10 +16,8 @@ export const reviews: Review[] = [
     location: "Big Sur, CA",
     serviceSlug: "wedding",
     featured: true,
-    avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80",
-    cover:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80",
+    avatar: "/assets/reviews/avatars/r-1.jpg",
+    cover: "/assets/reviews/covers/r-1.jpg",
   },
   {
     id: "r-2",
@@ -37,10 +35,8 @@ export const reviews: Review[] = [
     location: "San Francisco, CA",
     serviceSlug: "corporate",
     featured: true,
-    avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80",
-    cover:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1400&q=80",
+    avatar: "/assets/reviews/avatars/r-2.jpg",
+    cover: "/assets/reviews/covers/r-2.jpg",
   },
   {
     id: "r-3",
@@ -57,10 +53,8 @@ export const reviews: Review[] = [
     location: "Berkeley, CA",
     serviceSlug: "baby",
     featured: true,
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80",
-    cover:
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1400&q=80",
+    avatar: "/assets/reviews/avatars/r-3.jpg",
+    cover: "/assets/reviews/covers/r-3.jpg",
   },
   {
     id: "r-4",
@@ -89,8 +83,7 @@ export const reviews: Review[] = [
     location: "Napa Valley, CA",
     serviceSlug: "wedding",
     featured: true,
-    avatar:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+    avatar: "/assets/reviews/avatars/r-5.jpg",
   },
   {
     id: "r-6",
@@ -147,10 +140,8 @@ export const reviews: Review[] = [
     location: "Carmel, CA",
     serviceSlug: "wedding",
     featured: true,
-    avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
-    cover:
-      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1400&q=80",
+    avatar: "/assets/reviews/avatars/r-9.jpg",
+    cover: "/assets/reviews/covers/r-9.jpg",
   },
   {
     id: "r-10",
@@ -208,8 +199,7 @@ export const videoTestimonials: VideoTestimonial[] = [
     title: "Ella & James — Wedding Film",
     client: "Ella Mercer",
     category: "wedding",
-    poster:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80",
+    poster: "/assets/video-testimonials/vt-1.jpg",
     duration: "2:14",
     quote: "It felt like reliving the day — only softer, and somehow more true.",
   },
@@ -218,8 +208,7 @@ export const videoTestimonials: VideoTestimonial[] = [
     title: "Maison Noir — Brand Stories",
     client: "Daniel Kim",
     category: "corporate",
-    poster:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80",
+    poster: "/assets/video-testimonials/vt-2.jpg",
     duration: "1:48",
     quote: "Our team finally has film that matches the quality of the product.",
   },
@@ -228,8 +217,7 @@ export const videoTestimonials: VideoTestimonial[] = [
     title: "First Light — Baby Session",
     client: "Hannah Cole",
     category: "baby",
-    poster:
-      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=80",
+    poster: "/assets/video-testimonials/vt-3.jpg",
     duration: "1:12",
     quote: "A quiet film of the earliest days — we'll treasure it forever.",
   },
@@ -238,8 +226,7 @@ export const videoTestimonials: VideoTestimonial[] = [
     title: "Turning One — Birthday Recap",
     client: "Marcus Bell",
     category: "birthday",
-    poster:
-      "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1200&q=80",
+    poster: "/assets/video-testimonials/vt-4.jpg",
     duration: "1:36",
     quote: "Joy, cake, grandparents — all of it captured with such heart.",
   },

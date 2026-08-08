@@ -9,6 +9,13 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { InstagramPreview } from "@/components/sections/instagram-preview";
 import { CallToAction } from "@/components/sections/cta";
 import { buildMetadata } from "@/lib/seo";
+import { getFeaturedReviewsAsync } from "@/lib/content-store";
+import { resolveSingleImage, resolvePortfolioCategories } from "@/lib/site-images";
+import { portfolioCategories } from "@/data/portfolio-categories";
+
+// Reads data/db/*.json at request time (admin-added content) — must stay
+// dynamic so new entries appear without a rebuild.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   path: "/",
@@ -16,15 +23,21 @@ export const metadata: Metadata = buildMetadata({
     "Aperture Studio is a premium San Francisco photography studio crafting timeless images for weddings, brands, families, and editorial work.",
 });
 
-export default function HomePage() {
+export default async function HomePage() {
+  const [featuredReviews, heroSrc, categories] = await Promise.all([
+    getFeaturedReviewsAsync(),
+    resolveSingleImage("hero", "home", "/assets/hero/home.jpg"),
+    resolvePortfolioCategories(portfolioCategories),
+  ]);
+
   return (
     <>
-      <Hero />
-      <FeaturedPortfolio />
+      <Hero src={heroSrc} />
+      <FeaturedPortfolio categories={categories} />
       <ServicesOverview />
       <Statistics />
       <WhyChooseUs />
-      <Testimonials />
+      <Testimonials reviews={featuredReviews} />
       <InstagramPreview />
       <CallToAction />
     </>

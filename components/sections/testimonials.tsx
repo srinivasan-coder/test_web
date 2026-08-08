@@ -8,12 +8,12 @@ import { Card } from "@/components/ui/card";
 import { Carousel, CarouselItem } from "@/components/ui/carousel";
 import { CTAButton } from "@/components/ui/cta-button";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { featuredReviews } from "@/data/reviews";
+import type { Review } from "@/types/review";
 
 /**
  * Auto-scrolling testimonial preview using Embla.
  */
-export function Testimonials() {
+export function Testimonials({ reviews }: { reviews: Review[] }) {
   return (
     <section className="section-y bg-secondary/40">
       <Container>
@@ -41,7 +41,7 @@ export function Testimonials() {
             controls
             aria-label="Client testimonials"
           >
-            {featuredReviews.map((review) => (
+            {reviews.map((review) => (
               <CarouselItem
                 key={review.id}
                 basis="basis-[88%] sm:basis-[58%] lg:basis-[40%]"

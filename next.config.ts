@@ -26,16 +26,11 @@ const nextConfig: NextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      {
-        protocol: "https",
-        hostname: "plus.unsplash.com",
-      },
-    ],
+    // Admin-replaced images are served as /assets/**?v=<timestamp> so the
+    // optimizer treats each update as a fresh cache entry — without an
+    // explicit pattern here, Next rejects any local image URL with a query
+    // string outright ("url" parameter is not allowed).
+    localPatterns: [{ pathname: "/assets/**" }],
   },
   experimental: {
     optimizePackageImports: [
@@ -57,6 +52,18 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        // Admin-editable images: always revalidate so a replaced image is
+        // visible immediately instead of hidden behind the immutable cache
+        // rule above for up to a year. Falls back to a fast 304 when unchanged.
+        source: "/assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
           },
         ],
       },

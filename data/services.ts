@@ -10,7 +10,7 @@ export const services: Service[] = [
       "A calm, documentary approach to weddings — we capture the honest, in-between moments alongside the milestones, delivering a gallery you'll return to for a lifetime.",
     icon: "Heart",
     image: {
-      src: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80",
+      src: "/assets/services/wedding.jpg",
       alt: "Bride and groom embracing during golden hour",
       width: 1800,
       height: 1200,
@@ -43,7 +43,7 @@ export const services: Service[] = [
       "Story-led pre-wedding sessions designed around your places and pace — soft light, natural movement, and frames that feel like film stills from your own love story.",
     icon: "Sparkles",
     image: {
-      src: "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1800&q=80",
+      src: "/assets/services/pre-wedding.jpg",
       alt: "Couple during a romantic pre-wedding session",
       width: 1800,
       height: 1200,
@@ -76,7 +76,7 @@ export const services: Service[] = [
       "Unhurried baby sessions paced around rest and comfort. Soft natural light, patient posing, and heirloom frames of the smallest details — tiny hands, quiet smiles, first light.",
     icon: "Baby",
     image: {
-      src: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1800&q=80",
+      src: "/assets/services/baby.jpg",
       alt: "Sleeping newborn wrapped in soft linen",
       width: 1800,
       height: 1200,
@@ -109,7 +109,7 @@ export const services: Service[] = [
       "Executive headshots, team photography, and brand campaigns with clean light and approachable confidence — built for LinkedIn, annual reports, and modern websites.",
     icon: "Building2",
     image: {
-      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1800&q=80",
+      src: "/assets/services/corporate.jpg",
       alt: "Professional corporate headshot in natural light",
       width: 1800,
       height: 1200,
@@ -142,7 +142,7 @@ export const services: Service[] = [
       "Lookbooks, editorials, and campaign work shaped by silhouette, texture, and decisive light — collaborative productions that feel magazine-ready without losing warmth.",
     icon: "Camera",
     image: {
-      src: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=1800&q=80",
+      src: "/assets/services/fashion.jpg",
       alt: "Fashion model in an editorial pose",
       width: 1800,
       height: 1200,
@@ -175,7 +175,7 @@ export const services: Service[] = [
       "Clean, directional product photography for e-commerce, packaging, and campaigns — precise color, thoughtful composition, and files ready for every channel.",
     icon: "Package",
     image: {
-      src: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=1800&q=80",
+      src: "/assets/services/product.jpg",
       alt: "Luxury product still life photography",
       width: 1800,
       height: 1200,

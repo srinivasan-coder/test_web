@@ -1,9 +1,13 @@
 import type { MetadataRoute } from "next";
 
 import { SITE_CONFIG } from "@/lib/constants";
-import { blogPosts } from "@/data/blog";
+import { getAllBlogPosts } from "@/lib/content-store";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+// Reads data/db/blog.json — keep fresh so newly added posts show up here too.
+export const revalidate = 0;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = await getAllBlogPosts();
   const base = SITE_CONFIG.url;
   const now = new Date();
 

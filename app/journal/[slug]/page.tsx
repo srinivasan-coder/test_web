@@ -7,23 +7,28 @@ import { Container } from "@/components/ui/container";
 import { CTAButton } from "@/components/ui/cta-button";
 import { ArticleHeader, MarkdownContent, BlogCard } from "@/components/blog";
 import { JsonLd } from "@/components/seo/json-ld";
-import { blogPosts, getAllPostSlugs, getPostBySlug } from "@/data/blog";
+import { getAllBlogPosts, getAllBlogSlugsAsync, getBlogPostBySlugAsync } from "@/lib/content-store";
 import { SITE_CONFIG } from "@/lib/constants";
 import { blogPostingJsonLd, buildMetadata } from "@/lib/seo";
+
+// Reads data/db/blog.json at request time — must stay dynamic so newly
+// added posts (and related-post lists) reflect current content.
+export const dynamic = "force-dynamic";
 
 interface ArticlePageProps {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const slugs = await getAllBlogSlugsAsync();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogPostBySlugAsync(slug);
   if (!post) return { title: "Article" };
 
   return buildMetadata({
@@ -37,14 +42,15 @@ export async function generateMetadata({
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getBlogPostBySlugAsync(slug);
   if (!post) notFound();
 
   const articleUrl = new URL(
     `/journal/${post.slug}`,
     SITE_CONFIG.url,
   ).toString();
-  const related = blogPosts
+  const allPosts = await getAllBlogPosts();
+  const related = allPosts
     .filter((item) => item.id !== post.id && item.category === post.category)
     .slice(0, 3);
 

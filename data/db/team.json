@@ -1,0 +1,11 @@
+[
+  {
+    "id": "t-test",
+    "slug": "test",
+    "name": "test",
+    "role": "tse",
+    "bio": "tsetsegs",
+    "avatar": "/assets/team/test.jpg",
+    "featured": true
+  }
+]

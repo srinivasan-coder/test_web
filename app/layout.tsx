@@ -8,11 +8,7 @@ import {
   localBusinessJsonLd,
   websiteJsonLd,
 } from "@/lib/seo";
-import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer";
-import { FloatingWhatsApp } from "@/components/contact/floating-whatsapp";
-import { PageTransition } from "@/components/motion/page-transition";
-import { ScrollProgress } from "@/components/motion/scroll-progress";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { JsonLd } from "@/components/seo/json-ld";
 
 export const metadata: Metadata = {
@@ -57,19 +53,13 @@ export default function RootLayout({
     <html lang="en" className={fontVariables} suppressHydrationWarning>
       <body className="min-h-dvh bg-background text-foreground antialiased">
         <JsonLd data={[localBusinessJsonLd(), websiteJsonLd()]} />
-        <ScrollProgress />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:text-primary-foreground"
         >
           Skip to content
         </a>
-        <Navbar />
-        <main id="main" tabIndex={-1}>
-          <PageTransition>{children}</PageTransition>
-        </main>
-        <Footer />
-        <FloatingWhatsApp />
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   );

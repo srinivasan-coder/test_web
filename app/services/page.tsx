@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 
 import { PageHeader } from "@/components/ui/page-header";
 import { ServiceList } from "@/components/services";
@@ -8,6 +8,11 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { services } from "@/data/services";
 import { serviceFaqs } from "@/data/faqs";
 import { buildMetadata, faqPageJsonLd } from "@/lib/seo";
+import { resolveServices } from "@/lib/site-images";
+
+// Reads data/db/site-images.json at request time — must stay dynamic so a
+// replaced service image appears without a rebuild.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: "Services",
@@ -16,7 +21,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/services",
 });
 
-const FaqSection = dynamic(
+const FaqSection = nextDynamic(
   () =>
     import("@/components/services/faq-section").then((mod) => mod.FaqSection),
   {
@@ -30,7 +35,9 @@ const FaqSection = dynamic(
   },
 );
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const resolvedServices = await resolveServices(services);
+
   return (
     <>
       <JsonLd data={faqPageJsonLd(serviceFaqs)} />
@@ -40,7 +47,7 @@ export default function ServicesPage() {
         description="Each collection is designed like a product — considered inclusions, clear pricing, and a calm path from enquiry to gallery."
       />
 
-      <ServiceList services={services} />
+      <ServiceList services={resolvedServices} />
       <FaqSection items={serviceFaqs} />
       <CallToAction />
     </>

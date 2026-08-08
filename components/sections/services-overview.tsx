@@ -11,12 +11,13 @@ import {
 } from "@/components/ui/animated-section";
 import { staggerContainer } from "@/lib/animations";
 import { featuredServices } from "@/data/services";
+import { resolveServices } from "@/lib/site-images";
 
 /**
  * Photo-led services preview — imagery first, not icon cards.
  */
-export function ServicesOverview() {
-  const services = featuredServices.slice(0, 4);
+export async function ServicesOverview() {
+  const services = (await resolveServices(featuredServices)).slice(0, 4);
 
   return (
     <section className="section-y bg-secondary/40">

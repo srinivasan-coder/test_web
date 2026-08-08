@@ -9,13 +9,15 @@ import {
   AnimatedItem,
 } from "@/components/ui/animated-section";
 import { staggerContainer } from "@/lib/animations";
-import { instagramPosts } from "@/data/instagram";
+import { getAllInstagramPosts } from "@/lib/content-store";
 import { SITE_CONFIG } from "@/lib/constants";
 
 /**
  * Instagram-style image grid — photography first, quiet hover.
  */
-export function InstagramPreview() {
+export async function InstagramPreview() {
+  const instagramPosts = await getAllInstagramPosts();
+
   return (
     <section className="section-y">
       <Container>

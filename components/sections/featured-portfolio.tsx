@@ -14,12 +14,16 @@ import {
 } from "@/components/ui/animated-section";
 import { EASE_OUT_SOFT, staggerContainer } from "@/lib/animations";
 import { cn } from "@/lib/utils";
-import { portfolioCategories } from "@/data/portfolio-categories";
+import type { PortfolioCategory } from "@/types/portfolio";
 
 /**
  * Large premium category cards for the home portfolio preview.
  */
-export function FeaturedPortfolio() {
+export function FeaturedPortfolio({
+  categories,
+}: {
+  categories: PortfolioCategory[];
+}) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -45,7 +49,7 @@ export function FeaturedPortfolio() {
           variants={staggerContainer}
           className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
         >
-          {portfolioCategories.map((category, index) => (
+          {categories.map((category, index) => (
             <AnimatedItem
               key={category.id}
               className={cn(

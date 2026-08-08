@@ -18,9 +18,14 @@ import {
   equipment,
   awards,
 } from "@/data/about";
-import { team } from "@/data/team";
+import { getAllTeam } from "@/lib/content-store";
+import { resolveStudioStory } from "@/lib/site-images";
 import { SITE_CONFIG } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+
+// Reads data/db/team.json at request time — must stay dynamic so newly
+// added team members appear without a rebuild.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
@@ -28,7 +33,12 @@ export const metadata: Metadata = buildMetadata({
   path: "/about",
 });
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [team, resolvedStudioStory] = await Promise.all([
+    getAllTeam(),
+    resolveStudioStory(studioStory),
+  ]);
+
   return (
     <>
       <PageHeader
@@ -37,7 +47,7 @@ export default function AboutPage() {
         description="A small team in San Francisco, devoted to light, patience, and photographs made to last."
       />
 
-      <StudioStorySection story={studioStory} />
+      <StudioStorySection story={resolvedStudioStory} />
       <MissionVision mission={mission} vision={vision} />
       <Timeline events={timeline} />
       <TeamGrid members={team} />

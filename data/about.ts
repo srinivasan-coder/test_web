@@ -14,7 +14,7 @@ export const studioStory: StudioStory = {
     "Today we are a small, senior team of photographers, videographers, and editors. We photograph weddings, families, and brands with the same calm precision — never rushing the moment, always protecting the feeling.",
   ],
   image: {
-    src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1800&q=80",
+    src: "/assets/about/studio-story.jpg",
     alt: "Photographer working with natural window light in the studio",
     width: 1800,
     height: 1200,

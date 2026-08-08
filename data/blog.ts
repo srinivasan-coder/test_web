@@ -3,22 +3,19 @@ import type { BlogPost } from "@/types";
 const amara = {
   name: "Amara Osei",
   role: "Founder & Photographer",
-  avatar:
-    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+  avatar: "/assets/blog/authors/amara.jpg",
 };
 
 const leon = {
   name: "Leon Hart",
   role: "Videographer",
-  avatar:
-    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
+  avatar: "/assets/blog/authors/leon.jpg",
 };
 
 const noor = {
   name: "Noor Rahman",
   role: "Editor",
-  avatar:
-    "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+  avatar: "/assets/blog/authors/noor.jpg",
 };
 
 export const blogPosts: BlogPost[] = [
@@ -53,7 +50,7 @@ Sometimes the photograph is not ready yet. Clouds move. Guests settle. A child s
 `.trim(),
     category: "tips",
     cover: {
-      src: "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/the-art-of-natural-light.jpg",
       alt: "Soft natural light through a window",
       width: 1600,
       height: 1067,
@@ -94,7 +91,7 @@ The takeaway: editorial polish is rarely about more. It is about fewer decisions
 `.trim(),
     category: "behind-the-scenes",
     cover: {
-      src: "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/behind-the-scenes-paper-cities.jpg",
       alt: "Editorial architecture photography",
       width: 1600,
       height: 1067,
@@ -135,7 +132,7 @@ If your bag is heavy, your feet get slow — and slow feet miss the quiet moment
 `.trim(),
     category: "gear",
     cover: {
-      src: "https://images.unsplash.com/photo-1519183071298-a2962feb14f4?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/our-everyday-camera-bag.jpg",
       alt: "Camera gear laid out on a table",
       width: 1600,
       height: 1067,
@@ -175,7 +172,7 @@ We will help refine every block. Your job is to stay present — ours is to anti
 `.trim(),
     category: "tips",
     cover: {
-      src: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/how-to-prepare-for-your-wedding-timeline.jpg",
       alt: "Wedding ceremony aisle with florals",
       width: 1600,
       height: 1067,
@@ -212,7 +209,7 @@ A wedding gallery should feel like one continuous day. We match sequences carefu
 `.trim(),
     category: "inspiration",
     cover: {
-      src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/color-that-ages-well.jpg",
       alt: "Photographer reviewing images in soft light",
       width: 1600,
       height: 1067,
@@ -246,7 +243,7 @@ If you would like to visit before booking, we are happy to host a short walkthro
 `.trim(),
     category: "news",
     cover: {
-      src: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/studio-notes-marina-boulevard.jpg",
       alt: "Bright modern studio interior",
       width: 1600,
       height: 1067,
@@ -283,7 +280,7 @@ If a film feels hurried, it usually needed one more breath — not one more clip
 `.trim(),
     category: "behind-the-scenes",
     cover: {
-      src: "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/filming-with-restraint.jpg",
       alt: "Couple dancing at a wedding reception",
       width: 1600,
       height: 1067,
@@ -316,7 +313,7 @@ Inspiration is not imitation. It is a reminder of what honesty looks like when s
 `.trim(),
     category: "inspiration",
     cover: {
-      src: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/five-frames-that-changed-how-we-see.jpg",
       alt: "Vintage camera and photographs on a desk",
       width: 1600,
       height: 1067,
@@ -353,7 +350,7 @@ Used well, a drone is just another way to describe where love unfolded — not a
 `.trim(),
     category: "gear",
     cover: {
-      src: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=1600&q=80",
+      src: "/assets/blog/drone-coverage-when-it-helps.jpg",
       alt: "Drone flying over a coastal landscape",
       width: 1600,
       height: 1067,

@@ -11,13 +11,10 @@ import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/lib/constants";
 import { fadeInUp, staggerContainer, EASE_OUT_SOFT } from "@/lib/animations";
 
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2400&q=80";
-
 /**
  * Full-viewport cinematic hero — brand-led, photography-first.
  */
-export function Hero() {
+export function Hero({ src }: { src: string }) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -30,7 +27,7 @@ export function Hero() {
           className="absolute inset-0"
         >
           <Image
-            src={HERO_IMAGE}
+            src={src}
             alt="Couple sharing a quiet moment in soft natural light"
             fill
             priority

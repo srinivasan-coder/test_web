@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 
 import { PageHeader } from "@/components/ui/page-header";
 import { CallToAction } from "@/components/sections/cta";
@@ -8,15 +8,16 @@ import {
   ClientStatistics,
   FeaturedStories,
 } from "@/components/reviews";
-import {
-  reviews,
-  featuredStories,
-  videoTestimonials,
-  reviewStats,
-} from "@/data/reviews";
+import { videoTestimonials as seedVideoTestimonials, reviewStats } from "@/data/reviews";
+import { getAllReviews, getFeaturedStoriesAsync } from "@/lib/content-store";
+import { resolveVideoTestimonials } from "@/lib/site-images";
 import { getRatingSummary } from "@/lib/reviews";
 import { SITE_CONFIG } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
+
+// Reads data/db/reviews.json at request time — must stay dynamic so newly
+// added reviews appear without a rebuild.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: "Reviews",
@@ -24,7 +25,7 @@ export const metadata: Metadata = buildMetadata({
   path: "/reviews",
 });
 
-const ReviewGrid = dynamic(
+const ReviewGrid = nextDynamic(
   () =>
     import("@/components/reviews/review-grid").then((mod) => mod.ReviewGrid),
   {
@@ -38,14 +39,19 @@ const ReviewGrid = dynamic(
   },
 );
 
-const VideoTestimonials = dynamic(
+const VideoTestimonials = nextDynamic(
   () =>
     import("@/components/reviews/video-testimonials").then(
       (mod) => mod.VideoTestimonials,
     ),
 );
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const [reviews, featuredStories, videoTestimonials] = await Promise.all([
+    getAllReviews(),
+    getFeaturedStoriesAsync(),
+    resolveVideoTestimonials(seedVideoTestimonials),
+  ]);
   const summary = getRatingSummary(reviews);
 
   return (

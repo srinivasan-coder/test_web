@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 import { PageHeader } from "@/components/ui/page-header";
 import { ExplorerSkeleton } from "@/components/ui/skeleton";
-import { galleries } from "@/data/gallery";
+import { getAllGalleries } from "@/lib/content-store";
 import { isGalleryCategory } from "@/lib/gallery";
 import { buildMetadata } from "@/lib/seo";
 import type { GalleryFilter } from "@/types";
@@ -28,7 +28,7 @@ interface PortfolioPageProps {
 }
 
 export default async function PortfolioPage({ searchParams }: PortfolioPageProps) {
-  const params = await searchParams;
+  const [params, galleries] = await Promise.all([searchParams, getAllGalleries()]);
   const initialCategory: GalleryFilter =
     params.category && isGalleryCategory(params.category)
       ? params.category

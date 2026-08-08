@@ -1,0 +1,50 @@
+[
+  {
+    "id": "g-test",
+    "slug": "test",
+    "title": "test",
+    "description": "test",
+    "category": "wedding",
+    "orientation": "landscape",
+    "cover": {
+      "src": "/assets/gallery/test/cover.jpg",
+      "alt": "",
+      "width": 1600,
+      "height": 1067
+    },
+    "images": [
+      {
+        "src": "/assets/gallery/test/cover.jpg",
+        "alt": "",
+        "width": 1600,
+        "height": 1067
+      }
+    ],
+    "date": "2026-08-03",
+    "featured": false
+  },
+  {
+    "id": "g-fgnfgn",
+    "slug": "fgnfgn",
+    "title": "fgnfgn",
+    "description": "gnfghfg",
+    "category": "wedding",
+    "orientation": "landscape",
+    "cover": {
+      "src": "/assets/gallery/fgnfgn/cover.jpg",
+      "alt": "",
+      "width": 1600,
+      "height": 1067
+    },
+    "images": [
+      {
+        "src": "/assets/gallery/fgnfgn/cover.jpg",
+        "alt": "",
+        "width": 1600,
+        "height": 1067
+      }
+    ],
+    "date": "2026-08-04",
+    "featured": false
+  }
+]
