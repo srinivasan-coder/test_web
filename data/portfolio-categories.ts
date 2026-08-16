@@ -58,15 +58,15 @@ export const portfolioCategories: PortfolioCategory[] = [
     },
   },
   {
-    id: "cat-corporate",
-    slug: "corporate",
-    title: "Corporate",
+    id: "cat-maternity",
+    slug: "maternity",
+    title: "Maternity",
     description:
-      "Polished headshots and brand imagery for teams, executives, and campaigns.",
-    count: 120,
+      "Soft, unhurried portraits that honor the quiet anticipation before baby arrives.",
+    count: 60,
     image: {
-      src: "/assets/portfolio-categories/corporate.jpg",
-      alt: "Professional corporate headshot in natural light",
+      src: "/assets/portfolio-categories/maternity.jpg",
+      alt: "Expecting mother in a soft, natural-light portrait",
       width: 1400,
       height: 1750,
     },

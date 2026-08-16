@@ -2,22 +2,8 @@ import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/ui/page-header";
 import { CallToAction } from "@/components/sections/cta";
-import {
-  StudioStorySection,
-  MissionVision,
-  Timeline,
-  TeamGrid,
-  Equipment,
-  Awards,
-} from "@/components/about";
-import {
-  studioStory,
-  mission,
-  vision,
-  timeline,
-  equipment,
-  awards,
-} from "@/data/about";
+import { StudioStorySection, MissionVision, TeamGrid } from "@/components/about";
+import { studioStory, mission, vision } from "@/data/about";
 import { getAllTeam } from "@/lib/content-store";
 import { resolveStudioStory } from "@/lib/site-images";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -29,7 +15,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
-  description: `Meet ${SITE_CONFIG.name} — our story, team, equipment, and the milestones that shaped a quieter kind of photography.`,
+  description: `Meet ${SITE_CONFIG.name} — our story, our team, and the mission behind every frame.`,
   path: "/about",
 });
 
@@ -43,16 +29,13 @@ export default async function AboutPage() {
     <>
       <PageHeader
         eyebrow="About"
-        title="The studio behind the frames"
-        description="A small team in San Francisco, devoted to light, patience, and photographs made to last."
+        title="We don’t just capture weddings. We preserve the feeling."
+        description="Your story happens only once — we’re here to make sure you can relive it forever."
       />
 
       <StudioStorySection story={resolvedStudioStory} />
       <MissionVision mission={mission} vision={vision} />
-      <Timeline events={timeline} />
       <TeamGrid members={team} />
-      <Equipment items={equipment} />
-      <Awards items={awards} />
       <CallToAction />
     </>
   );

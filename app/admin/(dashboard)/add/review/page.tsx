@@ -38,8 +38,11 @@ export default function AddReviewPage() {
                   Choose…
                 </option>
                 <option value="wedding">Wedding</option>
-                <option value="corporate">Corporate</option>
+                <option value="engagement">Engagement</option>
+                <option value="pre-wedding">Pre Wedding</option>
                 <option value="baby">Baby</option>
+                <option value="maternity">Maternity</option>
+                <option value="corporate">Corporate</option>
                 <option value="birthday">Birthday</option>
               </Select>
             </Field>

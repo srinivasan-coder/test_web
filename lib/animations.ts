@@ -105,7 +105,7 @@ export const staggerContainer: Variants = {
   },
 };
 
-/** Tighter stagger for dense grids (gallery, blog). */
+/** Tighter stagger for dense grids (gallery). */
 export const galleryStagger: Variants = {
   hidden: {},
   visible: {

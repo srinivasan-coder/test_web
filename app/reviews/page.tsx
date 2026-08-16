@@ -3,13 +3,9 @@ import nextDynamic from "next/dynamic";
 
 import { PageHeader } from "@/components/ui/page-header";
 import { CallToAction } from "@/components/sections/cta";
-import {
-  OverallRating,
-  ClientStatistics,
-  FeaturedStories,
-} from "@/components/reviews";
+import { OverallRating, ClientStatistics } from "@/components/reviews";
 import { videoTestimonials as seedVideoTestimonials, reviewStats } from "@/data/reviews";
-import { getAllReviews, getFeaturedStoriesAsync } from "@/lib/content-store";
+import { getAllReviews } from "@/lib/content-store";
 import { resolveVideoTestimonials } from "@/lib/site-images";
 import { getRatingSummary } from "@/lib/reviews";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -21,7 +17,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = buildMetadata({
   title: "Reviews",
-  description: `Read client reviews for ${SITE_CONFIG.name} — weddings, corporate, baby, and birthday photography rated by real clients.`,
+  description: `Read client reviews for ${SITE_CONFIG.name} — weddings, engagement, baby, and maternity photography rated by real clients.`,
   path: "/reviews",
 });
 
@@ -47,9 +43,8 @@ const VideoTestimonials = nextDynamic(
 );
 
 export default async function ReviewsPage() {
-  const [reviews, featuredStories, videoTestimonials] = await Promise.all([
+  const [reviews, videoTestimonials] = await Promise.all([
     getAllReviews(),
-    getFeaturedStoriesAsync(),
     resolveVideoTestimonials(seedVideoTestimonials),
   ]);
   const summary = getRatingSummary(reviews);
@@ -66,7 +61,6 @@ export default async function ReviewsPage() {
       <ReviewGrid reviews={reviews} />
       <VideoTestimonials videos={videoTestimonials} />
       <ClientStatistics stats={reviewStats} />
-      <FeaturedStories stories={featuredStories} />
       <CallToAction />
     </>
   );

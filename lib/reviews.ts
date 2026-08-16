@@ -3,15 +3,19 @@ import type { Review, ReviewCategory, ReviewFilter, RatingSummary } from "@/type
 export const REVIEW_FILTERS: { value: ReviewFilter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "wedding", label: "Wedding" },
-  { value: "corporate", label: "Corporate" },
+  { value: "engagement", label: "Engagement" },
+  { value: "pre-wedding", label: "Pre Wedding" },
   { value: "baby", label: "Baby" },
-  { value: "birthday", label: "Birthday" },
+  { value: "maternity", label: "Maternity" },
 ];
 
 export const REVIEW_CATEGORY_LABELS: Record<ReviewCategory, string> = {
   wedding: "Wedding",
-  corporate: "Corporate",
+  engagement: "Engagement",
+  "pre-wedding": "Pre Wedding",
   baby: "Baby",
+  maternity: "Maternity",
+  corporate: "Corporate",
   birthday: "Birthday",
 };
 

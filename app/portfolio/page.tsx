@@ -12,7 +12,7 @@ import type { GalleryFilter } from "@/types";
 export const metadata: Metadata = buildMetadata({
   title: "Portfolio",
   description:
-    "Browse wedding, engagement, pre-wedding, baby, corporate, and fashion photography from Aperture Studio.",
+    "Browse wedding, engagement, pre-wedding, baby, maternity, corporate, and fashion photography from Fotolites Studio.",
   path: "/portfolio",
 });
 
@@ -39,7 +39,7 @@ export default async function PortfolioPage({ searchParams }: PortfolioPageProps
       <PageHeader
         eyebrow="Portfolio"
         title="A collection shaped by light"
-        description="Explore our work across weddings, engagements, families, brands, and fashion — filtered, searchable, and built to linger."
+        description="Explore our work across weddings, engagements, maternity, families, and brands — filtered, searchable, and built to linger."
       />
 
       <Suspense fallback={<ExplorerSkeleton variant="masonry" />}>

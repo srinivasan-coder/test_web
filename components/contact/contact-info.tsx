@@ -9,6 +9,7 @@ import {
 
 import { InstagramIcon } from "@/components/ui/instagram-icon";
 import { SITE_CONFIG } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 type InfoIcon = ComponentType<SVGProps<SVGSVGElement> & { strokeWidth?: number }>;
 
@@ -96,7 +97,10 @@ export function ContactInfo() {
                   {...(item.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="mt-1 inline-block text-base font-medium text-foreground transition-colors hover:text-primary"
+                  className={cn(
+                    "mt-1 inline-block text-base font-medium text-foreground transition-colors hover:text-primary",
+                    item.id === "phone" && "whitespace-nowrap",
+                  )}
                 >
                   {item.value}
                 </a>

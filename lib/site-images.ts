@@ -4,7 +4,6 @@ import type { Gallery } from "@/types/gallery";
 import type { TeamMember } from "@/types/team";
 import type { Review, VideoTestimonial } from "@/types/review";
 import type { InstagramPost } from "@/types/instagram";
-import type { BlogPost } from "@/types/blog";
 import type { Service } from "@/types/service";
 import type { PortfolioCategory } from "@/types/portfolio";
 import type { StudioStory } from "@/types/about";
@@ -119,24 +118,4 @@ export function resolveInstagramSeedWith(overrides: Overrides, seed: InstagramPo
     ...post,
     image: { ...post.image, src: resolve(overrides, "instagram", post.id, post.image.src) },
   }));
-}
-
-const BLOG_AUTHOR_SLOTS: Record<string, string> = {
-  "Amara Osei": "author-amara",
-  "Leon Hart": "author-leon",
-  "Noor Rahman": "author-noor",
-};
-
-export function resolveBlogSeedWith(overrides: Overrides, seed: BlogPost[]): BlogPost[] {
-  return seed.map((p) => {
-    const authorSlot = BLOG_AUTHOR_SLOTS[p.author.name];
-    return {
-      ...p,
-      cover: { ...p.cover, src: resolve(overrides, "blog", p.slug, p.cover.src) },
-      author:
-        p.author.avatar && authorSlot
-          ? { ...p.author, avatar: resolve(overrides, "blog", authorSlot, p.author.avatar) }
-          : p.author,
-    };
-  });
 }

@@ -19,7 +19,7 @@ export function Skeleton({ className, pill = false, ...props }: SkeletonProps) {
 }
 
 /**
- * Portfolio / journal explorer loading placeholder.
+ * Portfolio explorer loading placeholder.
  */
 export function ExplorerSkeleton({
   variant = "masonry",

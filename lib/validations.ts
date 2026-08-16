@@ -17,11 +17,10 @@ export const contactSchema = z.object({
   eventType: z.enum(
     [
       "wedding",
+      "engagement",
       "pre-wedding",
       "baby",
-      "corporate",
-      "fashion",
-      "product",
+      "maternity",
       "birthday",
       "other",
     ],
@@ -40,11 +39,10 @@ export const EVENT_TYPE_OPTIONS: {
   label: string;
 }[] = [
   { value: "wedding", label: "Wedding" },
+  { value: "engagement", label: "Engagement" },
   { value: "pre-wedding", label: "Pre Wedding" },
   { value: "baby", label: "Baby Shoot" },
-  { value: "corporate", label: "Corporate" },
-  { value: "fashion", label: "Fashion" },
-  { value: "product", label: "Product Photography" },
+  { value: "maternity", label: "Maternity" },
   { value: "birthday", label: "Birthday" },
   { value: "other", label: "Something else" },
 ];

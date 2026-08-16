@@ -44,12 +44,3 @@ export interface Service {
   galleryHref: string;
   featured?: boolean;
 }
-
-/**
- * FAQ entry for the Services page.
- */
-export interface FaqItem {
-  id: string;
-  question: string;
-  answer: string;
-}

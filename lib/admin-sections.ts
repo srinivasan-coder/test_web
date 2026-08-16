@@ -75,11 +75,10 @@ export const adminSections: AdminSection[] = [
     description: "One image per service card.",
     slots: [
       { id: "wedding", label: "Wedding", path: "services/wedding.jpg" },
+      { id: "engagement", label: "Engagement", path: "services/engagement.jpg" },
       { id: "pre-wedding", label: "Pre Wedding", path: "services/pre-wedding.jpg" },
       { id: "baby", label: "Baby Shoot", path: "services/baby.jpg" },
-      { id: "corporate", label: "Corporate", path: "services/corporate.jpg" },
-      { id: "fashion", label: "Fashion", path: "services/fashion.jpg" },
-      { id: "product", label: "Product", path: "services/product.jpg" },
+      { id: "maternity", label: "Maternity", path: "services/maternity.jpg" },
     ],
   },
   {
@@ -87,9 +86,7 @@ export const adminSections: AdminSection[] = [
     title: "Team",
     description: "Avatar for each team member.",
     slots: [
-      { id: "amara-osei", label: "Amara Osei", path: "team/amara-osei.jpg" },
-      { id: "leon-hart", label: "Leon Hart", path: "team/leon-hart.jpg" },
-      { id: "noor-rahman", label: "Noor Rahman", path: "team/noor-rahman.jpg" },
+      { id: "srinivas", label: "Srinivas", path: "team/srinivas.jpg" },
     ],
   },
   {
@@ -101,7 +98,7 @@ export const adminSections: AdminSection[] = [
       { id: "engagement", label: "Engagement", path: "portfolio-categories/engagement.jpg" },
       { id: "pre-wedding", label: "Pre Wedding", path: "portfolio-categories/pre-wedding.jpg" },
       { id: "baby", label: "Baby", path: "portfolio-categories/baby.jpg" },
-      { id: "corporate", label: "Corporate", path: "portfolio-categories/corporate.jpg" },
+      { id: "maternity", label: "Maternity", path: "portfolio-categories/maternity.jpg" },
     ],
   },
   ...galleryGroups,
@@ -141,25 +138,6 @@ export const adminSections: AdminSection[] = [
       label: `Tile ${i + 1}`,
       path: `instagram/ig-${i + 1}.jpg`,
     })),
-  },
-  {
-    slug: "blog",
-    title: "Journal / Blog",
-    description: "Post covers and author avatars.",
-    slots: [
-      { id: "the-art-of-natural-light", label: "The Art of Natural Light", path: "blog/the-art-of-natural-light.jpg" },
-      { id: "behind-the-scenes-paper-cities", label: "Behind the Scenes: Paper Cities", path: "blog/behind-the-scenes-paper-cities.jpg" },
-      { id: "our-everyday-camera-bag", label: "What's in Our Everyday Camera Bag", path: "blog/our-everyday-camera-bag.jpg" },
-      { id: "how-to-prepare-for-your-wedding-timeline", label: "How to Prepare for Your Wedding Timeline", path: "blog/how-to-prepare-for-your-wedding-timeline.jpg" },
-      { id: "color-that-ages-well", label: "Color That Ages Well", path: "blog/color-that-ages-well.jpg" },
-      { id: "studio-notes-marina-boulevard", label: "Studio Notes from Marina Boulevard", path: "blog/studio-notes-marina-boulevard.jpg" },
-      { id: "filming-with-restraint", label: "Filming with Restraint", path: "blog/filming-with-restraint.jpg" },
-      { id: "five-frames-that-changed-how-we-see", label: "Five Frames That Changed How We See", path: "blog/five-frames-that-changed-how-we-see.jpg" },
-      { id: "drone-coverage-when-it-helps", label: "Drone Coverage: When It Helps", path: "blog/drone-coverage-when-it-helps.jpg" },
-      { id: "author-amara", label: "Author avatar — Amara Osei", path: "blog/authors/amara.jpg" },
-      { id: "author-leon", label: "Author avatar — Leon Hart", path: "blog/authors/leon.jpg" },
-      { id: "author-noor", label: "Author avatar — Noor Rahman", path: "blog/authors/noor.jpg" },
-    ],
   },
 ];
 

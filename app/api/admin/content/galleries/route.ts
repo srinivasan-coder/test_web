@@ -10,6 +10,7 @@ const CATEGORIES: GalleryCategory[] = [
   "engagement",
   "pre-wedding",
   "baby",
+  "maternity",
   "corporate",
   "fashion",
 ];

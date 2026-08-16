@@ -15,10 +15,11 @@ interface TeamGridProps {
 }
 
 /**
- * Meet the team — photographer, videographer, editor.
+ * Meet the team.
  */
 export function TeamGrid({ members }: TeamGridProps) {
   const reduceMotion = useReducedMotion();
+  const isSingle = members.length === 1;
 
   return (
     <section className="section-y bg-secondary/40">
@@ -28,12 +29,18 @@ export function TeamGrid({ members }: TeamGridProps) {
             align="center"
             eyebrow="Meet the team"
             title="The people behind the lens"
-            description="A small senior crew — photographer, videographer, and editor — working as one calm unit."
+            description="The steady hand and eye behind every session — candid, unhurried, and focused on your story."
             className="mx-auto items-center"
           />
         </AnimatedSection>
 
-        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className={
+            isSingle
+              ? "mx-auto mt-14 max-w-sm"
+              : "mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          }
+        >
           {members.map((member, index) => (
             <motion.article
               key={member.id}

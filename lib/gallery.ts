@@ -9,8 +9,7 @@ export const GALLERY_CATEGORIES: {
   { value: "engagement", label: "Engagement" },
   { value: "pre-wedding", label: "Pre Wedding" },
   { value: "baby", label: "Baby" },
-  { value: "corporate", label: "Corporate" },
-  { value: "fashion", label: "Fashion" },
+  { value: "maternity", label: "Maternity" },
 ];
 
 export const CATEGORY_LABELS: Record<GalleryCategory, string> = {
@@ -18,6 +17,7 @@ export const CATEGORY_LABELS: Record<GalleryCategory, string> = {
   engagement: "Engagement",
   "pre-wedding": "Pre Wedding",
   baby: "Baby",
+  maternity: "Maternity",
   corporate: "Corporate",
   fashion: "Fashion",
 };

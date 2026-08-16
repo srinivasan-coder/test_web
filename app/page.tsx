@@ -4,7 +4,6 @@ import { Hero } from "@/components/sections/hero";
 import { FeaturedPortfolio } from "@/components/sections/featured-portfolio";
 import { ServicesOverview } from "@/components/sections/services-overview";
 import { Statistics } from "@/components/sections/statistics";
-import { WhyChooseUs } from "@/components/sections/why-choose-us";
 import { Testimonials } from "@/components/sections/testimonials";
 import { InstagramPreview } from "@/components/sections/instagram-preview";
 import { CallToAction } from "@/components/sections/cta";
@@ -20,7 +19,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = buildMetadata({
   path: "/",
   description:
-    "Aperture Studio is a premium San Francisco photography studio crafting timeless images for weddings, brands, families, and editorial work.",
+    "Fotolites Studio is a premium Chennai photography studio crafting timeless images for weddings, engagements, families, and brands.",
 });
 
 export default async function HomePage() {
@@ -36,7 +35,6 @@ export default async function HomePage() {
       <FeaturedPortfolio categories={categories} />
       <ServicesOverview />
       <Statistics />
-      <WhyChooseUs />
       <Testimonials reviews={featuredReviews} />
       <InstagramPreview />
       <CallToAction />

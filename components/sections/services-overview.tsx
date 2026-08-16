@@ -67,11 +67,6 @@ export async function ServicesOverview() {
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {service.summary}
                     </p>
-                    {service.startingPrice ? (
-                      <p className="mt-4 text-sm font-medium text-foreground">
-                        From ${service.startingPrice.toLocaleString()}
-                      </p>
-                    ) : null}
                   </div>
                   <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-secondary text-foreground transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
                     <ArrowUpRight className="size-4" aria-hidden="true" />

@@ -1,7 +1,14 @@
 /**
  * Review categories used by the Reviews page filters.
  */
-export type ReviewCategory = "wedding" | "corporate" | "baby" | "birthday";
+export type ReviewCategory =
+  | "wedding"
+  | "engagement"
+  | "pre-wedding"
+  | "baby"
+  | "maternity"
+  | "corporate"
+  | "birthday";
 
 export type ReviewFilter = "all" | ReviewCategory;
 

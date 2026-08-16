@@ -4,29 +4,29 @@ import type { NavLink, SocialLink } from "@/types";
  * Global site metadata — single source of truth for branding + SEO.
  */
 export const SITE_CONFIG = {
-  name: "Aperture Studio",
-  shortName: "Aperture",
+  name: "Fotolites Studio",
+  shortName: "Fotolites",
   tagline: "Photography, refined.",
   description:
-    "Aperture Studio is a premium photography studio crafting timeless images for people, brands, and spaces.",
+    "Fotolites Studio is a premium photography studio crafting timeless images for people, brands, and spaces.",
   url: "https://aperture.studio",
-  email: "hello@aperture.studio",
-  phone: "+1 (415) 555-0132",
-  /** Digits-only for tel: / wa.me links. */
-  phoneE164: "14155550132",
-  whatsapp: "https://wa.me/14155550132",
-  instagram: "https://instagram.com",
-  address: "17 Marina Boulevard, San Francisco, CA",
+  email: "fotolitestudioz@gmail.com",
+  phone: "+91 93848 16570 / +91 89392 92870",
+  /** Digits-only, primary number — used for tel: / wa.me links. */
+  phoneE164: "919384816570",
+  whatsapp: "https://wa.me/919384816570",
+  instagram: "https://www.instagram.com/fotolites_studio_?igsh=eXdzZWdjODFkMmx4",
+  address:
+    "12A, West Vanniar 1st Cross Street, Nasapakkam, K.K.Nagar, Chennai - 600078.",
   hours: {
     weekdays: "Mon – Fri, 10:00 – 18:00",
     weekend: "Sat by appointment",
     note: "Sundays reserved for weddings & events",
   },
-  /** Placeholder map embed — replace with a real Google Maps iframe src. */
   mapEmbedUrl:
-    "https://www.google.com/maps?q=17+Marina+Boulevard,+San+Francisco,+CA&output=embed",
+    "https://www.google.com/maps?q=12A+West+Vanniar+1st+Cross+Street,+Nasapakkam,+K.K.Nagar,+Chennai+-+600078&output=embed",
   mapLink:
-    "https://www.google.com/maps/search/?api=1&query=17+Marina+Boulevard,+San+Francisco,+CA",
+    "https://www.google.com/maps/search/?api=1&query=12A+West+Vanniar+1st+Cross+Street,+Nasapakkam,+K.K.Nagar,+Chennai+-+600078",
   /** Served by `app/opengraph-image.tsx`. */
   ogImage: "/opengraph-image",
 } as const;
@@ -40,7 +40,6 @@ export const NAV_LINKS: NavLink[] = [
   { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Reviews", href: "/reviews" },
-  { label: "Journal", href: "/journal" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -52,8 +51,7 @@ export const SERVICE_LINKS: NavLink[] = [
   { label: "Engagement", href: "/portfolio?category=engagement" },
   { label: "Pre Wedding", href: "/portfolio?category=pre-wedding" },
   { label: "Baby", href: "/portfolio?category=baby" },
-  { label: "Corporate", href: "/portfolio?category=corporate" },
-  { label: "Fashion", href: "/portfolio?category=fashion" },
+  { label: "Maternity", href: "/portfolio?category=maternity" },
 ];
 
 /**
@@ -65,5 +63,15 @@ export const SOCIAL_LINKS: SocialLink[] = [
     platform: "linkedin",
     href: "https://linkedin.com/company/aperture-studio",
     label: "LinkedIn",
+  },
+  {
+    platform: "facebook",
+    href: "https://www.facebook.com/fotolitesstudio/",
+    label: "Facebook",
+  },
+  {
+    platform: "youtube",
+    href: "https://www.youtube.com/channel/UC0KcXZfnSd3w2YAvamckN0Q",
+    label: "YouTube",
   },
 ];

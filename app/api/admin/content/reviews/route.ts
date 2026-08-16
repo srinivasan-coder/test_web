@@ -5,7 +5,15 @@ import type { Review, ReviewCategory, ReviewSource } from "@/types/review";
 
 export const runtime = "nodejs";
 
-const CATEGORIES: ReviewCategory[] = ["wedding", "corporate", "baby", "birthday"];
+const CATEGORIES: ReviewCategory[] = [
+  "wedding",
+  "engagement",
+  "pre-wedding",
+  "baby",
+  "maternity",
+  "corporate",
+  "birthday",
+];
 const SOURCES: ReviewSource[] = ["google", "studio"];
 
 export async function POST(request: Request) {

@@ -33,6 +33,7 @@ export default function AddGalleryPage() {
                 <option value="engagement">Engagement</option>
                 <option value="pre-wedding">Pre Wedding</option>
                 <option value="baby">Baby</option>
+                <option value="maternity">Maternity</option>
                 <option value="corporate">Corporate</option>
                 <option value="fashion">Fashion</option>
               </Select>

@@ -97,8 +97,8 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`tel:${SITE_CONFIG.phone.replace(/[^+\d]/g, "")}`}
-                  className="flex items-center gap-3 transition-colors hover:text-foreground"
+                  href={`tel:${SITE_CONFIG.phoneE164}`}
+                  className="flex items-center gap-3 whitespace-nowrap transition-colors hover:text-foreground"
                 >
                   <Phone className="size-4 shrink-0 text-primary" aria-hidden="true" />
                   {SITE_CONFIG.phone}

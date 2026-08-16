@@ -31,9 +31,6 @@ export function ServiceCard({
 }: ServiceCardProps) {
   const reduceMotion = useReducedMotion();
   const Icon = getIcon(service.icon);
-  const price = service.startingPrice
-    ? `$${service.startingPrice.toLocaleString()}`
-    : "On request";
 
   return (
     <motion.article
@@ -132,28 +129,17 @@ export function ServiceCard({
             </div>
           </div>
 
-          <div className="mt-10 flex flex-col gap-6 border-t border-border pt-8 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                {service.priceLabel ?? "Starting from"}
-              </p>
-              <p className="mt-1 font-serif text-3xl font-semibold tracking-tight text-foreground">
-                {price}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <Button asChild variant="outline" size="lg">
-                <Link href={service.galleryHref}>View Gallery</Link>
-              </Button>
-              <CTAButton
-                href={`/contact?eventType=${service.slug}`}
-                size="lg"
-                withArrow={false}
-              >
-                Book Now
-              </CTAButton>
-            </div>
+          <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-border pt-8">
+            <Button asChild variant="outline" size="lg">
+              <Link href={service.galleryHref}>View Gallery</Link>
+            </Button>
+            <CTAButton
+              href={`/contact?eventType=${service.slug}`}
+              size="lg"
+              withArrow={false}
+            >
+              Book Now
+            </CTAButton>
           </div>
         </div>
       </div>

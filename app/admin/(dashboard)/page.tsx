@@ -11,7 +11,6 @@ const ADD_NEW_LINKS = [
   { href: "/admin/add/team", label: "Add team member", description: "New person on About" },
   { href: "/admin/add/review", label: "Add review", description: "New client testimonial" },
   { href: "/admin/add/instagram", label: "Add Instagram tile", description: "New feed photo" },
-  { href: "/admin/add/blog", label: "Add journal post", description: "New article" },
 ];
 
 export default async function AdminDashboardPage() {
@@ -25,8 +24,8 @@ export default async function AdminDashboardPage() {
     <div>
       <h1 className="text-2xl font-semibold text-foreground">Add new content</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Create a brand-new gallery, team member, review, Instagram tile, or journal
-        post — live immediately, no rebuild needed.
+        Create a brand-new gallery, team member, review, or Instagram tile — live
+        immediately, no rebuild needed.
       </p>
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

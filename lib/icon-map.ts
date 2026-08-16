@@ -15,6 +15,7 @@ import {
   Aperture,
   Award,
   Sun,
+  Flower2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -39,6 +40,7 @@ export const ICON_MAP: Record<string, LucideIcon> = {
   Aperture,
   Award,
   Sun,
+  Flower2,
 };
 
 export function getIcon(name: string): LucideIcon {

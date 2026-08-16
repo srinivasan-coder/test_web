@@ -78,15 +78,16 @@ export function localBusinessJsonLd() {
     email: SITE_CONFIG.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "17 Marina Boulevard",
-      addressLocality: "San Francisco",
-      addressRegion: "CA",
-      addressCountry: "US",
+      streetAddress: "12A, West Vanniar 1st Cross Street, Nasapakkam",
+      addressLocality: "Chennai",
+      addressRegion: "Tamil Nadu",
+      postalCode: "600078",
+      addressCountry: "IN",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 37.806,
-      longitude: -122.433,
+      latitude: 13.0378,
+      longitude: 80.2101,
     },
     openingHoursSpecification: [
       {
@@ -96,7 +97,12 @@ export function localBusinessJsonLd() {
         closes: "18:00",
       },
     ],
-    sameAs: [SITE_CONFIG.instagram, SITE_CONFIG.whatsapp],
+    sameAs: [
+      SITE_CONFIG.instagram,
+      "https://www.facebook.com/fotolitesstudio/",
+      "https://www.youtube.com/channel/UC0KcXZfnSd3w2YAvamckN0Q",
+      SITE_CONFIG.whatsapp,
+    ],
     priceRange: "$$",
   };
 }
@@ -114,52 +120,5 @@ export function websiteJsonLd() {
       name: SITE_CONFIG.name,
       url: SITE_CONFIG.url,
     },
-  };
-}
-
-/** BlogPosting JSON-LD for journal articles. */
-export function blogPostingJsonLd(input: {
-  title: string;
-  description: string;
-  url: string;
-  image: string;
-  datePublished: string;
-  authorName: string;
-}) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: input.title,
-    description: input.description,
-    image: input.image,
-    datePublished: input.datePublished,
-    author: {
-      "@type": "Person",
-      name: input.authorName,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-    },
-    mainEntityOfPage: input.url,
-  };
-}
-
-/** FAQPage JSON-LD for the services FAQ. */
-export function faqPageJsonLd(
-  items: { question: string; answer: string }[],
-) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
   };
 }

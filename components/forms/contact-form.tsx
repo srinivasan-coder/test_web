@@ -113,7 +113,7 @@ export function ContactForm({ onSubmit, defaultEventType }: ContactFormProps) {
                     id="phone"
                     type="tel"
                     autoComplete="tel"
-                    placeholder="+1 (415) 555-0132"
+                    placeholder="+91 93848 16570"
                     aria-invalid={!!errors.phone}
                     {...register("phone")}
                   />
