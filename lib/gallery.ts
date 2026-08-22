@@ -65,3 +65,34 @@ export function filterGalleries(
     return haystack.includes(normalized);
   });
 }
+
+/**
+ * Distributes galleries into `columnCount` columns, always adding the next
+ * item to whichever column currently has the smallest estimated total
+ * height — unlike native CSS multi-column layout (which fills column 1
+ * top-to-bottom before moving to column 2), this keeps columns visually
+ * balanced instead of leaving one much shorter than the others.
+ */
+export function distributeIntoColumns(
+  galleries: Gallery[],
+  columnCount: number,
+): { gallery: Gallery; index: number }[][] {
+  const columns: { gallery: Gallery; index: number }[][] = Array.from(
+    { length: columnCount },
+    () => [],
+  );
+  const heights: number[] = new Array(columnCount).fill(0);
+
+  galleries.forEach((gallery, index) => {
+    let shortest = 0;
+    for (let i = 1; i < columnCount; i++) {
+      if ((heights[i] ?? 0) < (heights[shortest] ?? 0)) shortest = i;
+    }
+    columns[shortest]!.push({ gallery, index });
+    // Columns render at equal width, so height ratio alone (independent of
+    // actual pixel width) is enough to compare relative column heights.
+    heights[shortest] = (heights[shortest] ?? 0) + gallery.cover.height / gallery.cover.width;
+  });
+
+  return columns;
+}

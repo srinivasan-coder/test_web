@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
-import { cn } from "@/lib/utils";
 import { getCategoryLabel } from "@/lib/gallery";
 import { EASE_OUT_SOFT, staggerItem } from "@/lib/animations";
 import type { Gallery } from "@/types";
@@ -43,7 +42,7 @@ export function GalleryCard({
         ease: EASE_OUT_SOFT,
       }}
       whileHover={reduceMotion ? undefined : { y: -3 }}
-      className={cn("mb-4 break-inside-avoid", className)}
+      className={className}
     >
       <button
         type="button"

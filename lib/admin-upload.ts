@@ -1,6 +1,6 @@
 import { put } from "@vercel/blob";
 
-const MAX_BYTES = 10 * 1024 * 1024; // 10MB
+const MAX_BYTES = 20 * 1024 * 1024; // 20MB
 const EXT_BY_MIME: Record<string, string> = {
   "image/jpeg": ".jpg",
   "image/png": ".png",
@@ -28,7 +28,7 @@ export async function saveUploadedImage(
     throw new UploadValidationError("Only JPEG, PNG, or WebP images are allowed");
   }
   if (file.size > MAX_BYTES) {
-    throw new UploadValidationError("Image must be 10MB or smaller");
+    throw new UploadValidationError("Image must be 20MB or smaller");
   }
 
   const pathname = pathnameHint.replace(/\.[^./]+$/, "") + correctExt;
