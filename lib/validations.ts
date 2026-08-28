@@ -42,7 +42,7 @@ export const EVENT_TYPE_OPTIONS: {
   { value: "engagement", label: "Engagement" },
   { value: "pre-wedding", label: "Pre Wedding" },
   { value: "baby", label: "Baby Shoot" },
-  { value: "maternity", label: "Maternity" },
+  { value: "maternity", label: "Babyshower / Maternity" },
   { value: "birthday", label: "Birthday" },
   { value: "other", label: "Something else" },
 ];

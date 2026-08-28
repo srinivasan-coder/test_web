@@ -1,9 +1,11 @@
 "use client";
 
+import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 import { Container } from "@/components/ui/container";
 import { CTAButton } from "@/components/ui/cta-button";
@@ -13,32 +15,62 @@ import { fadeInUp, staggerContainer, EASE_OUT_SOFT } from "@/lib/animations";
 
 /**
  * Full-viewport cinematic hero — brand-led, photography-first.
+ * Background rotates through `images` as an autoplaying, full-bleed slideshow.
  */
-export function Hero({ src }: { src: string }) {
+export function Hero({ images }: { images: string[] }) {
   const reduceMotion = useReducedMotion();
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  const plugins = React.useMemo(
+    () =>
+      reduceMotion || images.length < 2
+        ? []
+        : [Autoplay({ delay: 6000, stopOnInteraction: false })],
+    [reduceMotion, images.length],
+  );
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, plugins);
+
+  React.useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on("select", onSelect).on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect).off("reInit", onSelect);
+    };
+  }, [emblaApi]);
 
   return (
     <section className="relative flex min-h-dvh items-end overflow-hidden">
-      <div className="absolute inset-0">
-        <motion.div
-          initial={reduceMotion ? false : { scale: 1.06, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.1, ease: EASE_OUT_SOFT }}
-          className="absolute inset-0"
-        >
-          <Image
-            src={src}
-            alt="Couple sharing a quiet moment in soft natural light"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[center_30%]"
-          />
-        </motion.div>
+      <motion.div
+        className="absolute inset-0"
+        initial={reduceMotion ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.1, ease: EASE_OUT_SOFT }}
+      >
+        <div className="h-full overflow-hidden" ref={emblaRef}>
+          <div className="flex h-full">
+            {images.map((src, i) => (
+              <div
+                key={src}
+                className="relative h-full min-w-0 shrink-0 grow-0 basis-full"
+              >
+                <Image
+                  src={src}
+                  alt="Aperture Studio photography"
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="object-cover object-[center_30%]"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
         {/* Single bottom legibility band — keeps photography visible */}
         <div className="absolute inset-0 bg-ink/25" />
         <div className="absolute inset-x-0 bottom-0 h-[55%] bg-ink/55" />
-      </div>
+      </motion.div>
 
       <Container className="relative z-10 w-full pb-24 pt-[calc(var(--header-height)+4rem)] md:pb-28">
         <motion.div
@@ -67,8 +99,8 @@ export function Hero({ src }: { src: string }) {
             variants={fadeInUp}
             className="max-w-md text-base leading-relaxed text-white/78 sm:text-lg"
           >
-            Premium photography for weddings, families, and brands — crafted
-            with calm precision and cinematic light.
+            Premium photography for weddings, engagements, and every
+            milestone — crafted with calm precision and cinematic light.
           </motion.p>
 
           <motion.div
@@ -85,28 +117,32 @@ export function Hero({ src }: { src: string }) {
         </motion.div>
       </Container>
 
-      <motion.a
-        href="#featured-portfolio"
-        initial={reduceMotion ? false : { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.9, duration: 0.5 }}
-        className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/65 transition-colors duration-300 hover:text-white"
-        aria-label="Scroll to featured portfolio"
-      >
-        <span className="text-[10px] font-medium uppercase tracking-[0.22em]">
-          Scroll
-        </span>
-        <motion.span
-          animate={reduceMotion ? undefined : { y: [0, 5, 0] }}
-          transition={
-            reduceMotion
-              ? undefined
-              : { duration: 2.2, repeat: Infinity, ease: EASE_OUT_SOFT }
-          }
+      {images.length > 1 ? (
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.5 }}
+          className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2.5"
+          role="tablist"
+          aria-label="Hero slides"
         >
-          <ChevronDown className="size-5" strokeWidth={1.5} aria-hidden="true" />
-        </motion.span>
-      </motion.a>
+          {images.map((src, i) => (
+            <button
+              key={src}
+              type="button"
+              role="tab"
+              aria-selected={selectedIndex === i}
+              aria-label={`Show slide ${i + 1}`}
+              onClick={() => emblaApi?.scrollTo(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                selectedIndex === i
+                  ? "w-7 bg-white"
+                  : "w-1.5 bg-white/45 hover:bg-white/70"
+              }`}
+            />
+          ))}
+        </motion.div>
+      ) : null}
     </section>
   );
 }

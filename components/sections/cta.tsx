@@ -41,8 +41,8 @@ export async function CallToAction() {
             Ready to create something you&apos;ll keep forever?
           </h2>
           <p className="mt-5 max-w-lg text-base leading-relaxed text-white/78 sm:text-lg">
-            Tell us about your celebration or brand — we&apos;ll craft a session
-            tailored to your light and your people.
+            Tell us about your celebration or story — we&apos;ll craft a
+            session that feels uniquely yours.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <CTAButton href="/contact" variant="inverse" withArrow={false}>

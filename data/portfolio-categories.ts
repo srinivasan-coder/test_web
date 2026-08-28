@@ -16,20 +16,6 @@ export const portfolioCategories: PortfolioCategory[] = [
     },
   },
   {
-    id: "cat-engagement",
-    slug: "engagement",
-    title: "Engagement",
-    description:
-      "Intimate sessions that feel like a private film — soft light, real laughter, your places.",
-    count: 110,
-    image: {
-      src: "/assets/portfolio-categories/engagement.jpg",
-      alt: "Engaged couple sharing a quiet outdoor moment",
-      width: 1400,
-      height: 1750,
-    },
-  },
-  {
     id: "cat-pre-wedding",
     slug: "pre-wedding",
     title: "Pre Wedding",
@@ -44,6 +30,34 @@ export const portfolioCategories: PortfolioCategory[] = [
     },
   },
   {
+    id: "cat-engagement",
+    slug: "engagement",
+    title: "Engagement",
+    description:
+      "Intimate sessions that feel like a private film — soft light, real laughter, your places.",
+    count: 110,
+    image: {
+      src: "/assets/portfolio-categories/engagement.jpg",
+      alt: "Engaged couple sharing a quiet outdoor moment",
+      width: 1400,
+      height: 1750,
+    },
+  },
+  {
+    id: "cat-maternity",
+    slug: "maternity",
+    title: "Babyshower / Maternity",
+    description:
+      "Soft, unhurried portraits that honor the quiet anticipation before baby arrives.",
+    count: 60,
+    image: {
+      src: "/assets/portfolio-categories/maternity.jpg",
+      alt: "Expecting mother in a soft, natural-light portrait",
+      width: 1400,
+      height: 1750,
+    },
+  },
+  {
     id: "cat-baby",
     slug: "baby",
     title: "Baby",
@@ -53,20 +67,6 @@ export const portfolioCategories: PortfolioCategory[] = [
     image: {
       src: "/assets/portfolio-categories/baby.jpg",
       alt: "Sleeping newborn wrapped in soft linen",
-      width: 1400,
-      height: 1750,
-    },
-  },
-  {
-    id: "cat-maternity",
-    slug: "maternity",
-    title: "Maternity",
-    description:
-      "Soft, unhurried portraits that honor the quiet anticipation before baby arrives.",
-    count: 60,
-    image: {
-      src: "/assets/portfolio-categories/maternity.jpg",
-      alt: "Expecting mother in a soft, natural-light portrait",
       width: 1400,
       height: 1750,
     },

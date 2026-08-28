@@ -26,7 +26,7 @@ export async function ServicesOverview() {
           <SectionHeading
             eyebrow="Services"
             title="Considered work, across every occasion"
-            description="From weddings to brand campaigns — the same quiet craft, clear process, and lasting finish."
+            description="From weddings to every milestone worth celebrating."
           />
           <CTAButton
             href="/services"

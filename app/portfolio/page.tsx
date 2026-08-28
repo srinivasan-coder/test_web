@@ -39,7 +39,7 @@ export default async function PortfolioPage({ searchParams }: PortfolioPageProps
       <PageHeader
         eyebrow="Portfolio"
         title="A collection shaped by light"
-        description="Explore our work across weddings, engagements, maternity, families, and brands — filtered, searchable, and built to linger."
+        description="Explore our work across weddings, engagements, maternity, families, and preshoots — filtered, searchable, and built to linger."
       />
 
       <Suspense fallback={<ExplorerSkeleton variant="masonry" />}>

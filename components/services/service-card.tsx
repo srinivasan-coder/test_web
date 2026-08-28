@@ -83,51 +83,64 @@ export function ServiceCard({
           <h2 className="mt-6 font-serif text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
             {service.title}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {service.description}
-          </p>
-
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
-            <div>
-              <h3 className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
-                What&apos;s included
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {service.includes.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground"
-                  >
-                    <Check
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      strokeWidth={2}
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
-                Package highlights
-              </h3>
-              <ul className="mt-4 space-y-3">
-                {service.highlights.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground"
-                  >
-                    <Sparkles
-                      className="mt-0.5 size-4 shrink-0 text-primary"
-                      strokeWidth={1.75}
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mt-4 space-y-4">
+            {service.description.split("\n\n").map((paragraph, i) => (
+              <p
+                key={i}
+                className="text-base leading-relaxed text-muted-foreground sm:text-lg"
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
+
+          {service.includes.length > 0 || service.highlights.length > 0 ? (
+            <div className="mt-8 grid gap-8 sm:grid-cols-2">
+              {service.includes.length > 0 ? (
+                <div>
+                  <h3 className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
+                    What&apos;s included
+                  </h3>
+                  <ul className="mt-4 space-y-3">
+                    {service.includes.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground"
+                      >
+                        <Check
+                          className="mt-0.5 size-4 shrink-0 text-primary"
+                          strokeWidth={2}
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {service.highlights.length > 0 ? (
+                <div>
+                  <h3 className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
+                    Package highlights
+                  </h3>
+                  <ul className="mt-4 space-y-3">
+                    {service.highlights.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground"
+                      >
+                        <Sparkles
+                          className="mt-0.5 size-4 shrink-0 text-primary"
+                          strokeWidth={1.75}
+                        />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
 
           <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-border pt-8">
             <Button asChild variant="outline" size="lg">

@@ -56,7 +56,7 @@ const items: InfoItem[] = [
   {
     id: "instagram",
     label: "Instagram",
-    value: `@${SITE_CONFIG.shortName.toLowerCase()}`,
+    value: `@${SITE_CONFIG.instagramHandle}`,
     href: SITE_CONFIG.instagram,
     icon: InstagramIcon,
     external: true,
@@ -75,8 +75,7 @@ export function ContactInfo() {
           We&apos;d love to hear from you
         </h2>
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-          Tell us about your celebration or brand project. We typically reply
-          within two business days.
+          Tell us about your special day or what you&apos;re planning.
         </p>
       </div>
 
@@ -124,9 +123,6 @@ export function ContactInfo() {
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               {SITE_CONFIG.hours.weekend}
-            </p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {SITE_CONFIG.hours.note}
             </p>
           </div>
         </div>

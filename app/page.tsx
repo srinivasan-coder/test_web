@@ -22,16 +22,25 @@ export const metadata: Metadata = buildMetadata({
     "Fotolites Studio is a premium Chennai photography studio crafting timeless images for weddings, engagements, families, and brands.",
 });
 
+const HERO_SLIDES = [
+  { id: "slide-1", fallback: "/assets/hero/slide-1.jpg" },
+  { id: "slide-2", fallback: "/assets/hero/slide-2.jpg" },
+  { id: "slide-3", fallback: "/assets/hero/slide-3.jpg" },
+  { id: "slide-4", fallback: "/assets/hero/slide-4.jpg" },
+];
+
 export default async function HomePage() {
-  const [featuredReviews, heroSrc, categories] = await Promise.all([
+  const [featuredReviews, heroImages, categories] = await Promise.all([
     getFeaturedReviewsAsync(),
-    resolveSingleImage("hero", "home", "/assets/hero/home.jpg"),
+    Promise.all(
+      HERO_SLIDES.map((slide) => resolveSingleImage("hero", slide.id, slide.fallback)),
+    ),
     resolvePortfolioCategories(portfolioCategories),
   ]);
 
   return (
     <>
-      <Hero src={heroSrc} />
+      <Hero images={heroImages} />
       <FeaturedPortfolio categories={categories} />
       <ServicesOverview />
       <Statistics />

@@ -21,7 +21,7 @@ export function Testimonials({ reviews }: { reviews: Review[] }) {
           <SectionHeading
             eyebrow="Testimonials"
             title="Loved by the people we photograph"
-            description="A few words from couples, families, and brands who've trusted us with their story."
+            description="A few words from couples, families, and clients who've trusted us with their story."
           />
           <CTAButton
             href="/reviews"

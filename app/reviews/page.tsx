@@ -54,7 +54,7 @@ export default async function ReviewsPage() {
       <PageHeader
         eyebrow="Reviews"
         title="Trusted by the people we photograph"
-        description="Honest feedback from couples, families, and brands — a clear picture of what it's like to work with the studio."
+        description="Honest feedback from couples, families, and clients — a clear picture of what it's like to work with the studio."
       />
 
       <OverallRating summary={summary} />

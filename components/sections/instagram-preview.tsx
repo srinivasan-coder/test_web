@@ -36,7 +36,7 @@ export async function InstagramPreview() {
             className="shrink-0 self-start md:self-auto"
           >
             <InstagramIcon className="size-4" aria-hidden="true" />
-            @{SITE_CONFIG.shortName.toLowerCase()}
+            @{SITE_CONFIG.instagramHandle}
           </CTAButton>
         </AnimatedSection>
 

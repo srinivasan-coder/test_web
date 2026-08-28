@@ -36,7 +36,7 @@ export function ReviewGrid({ reviews }: ReviewGridProps) {
           <SectionHeading
             eyebrow="Client reviews"
             title="What people are saying"
-            description="Real feedback from weddings, brands, families, and celebrations — styled with the clarity of a Google review."
+            description="Real feedback from weddings, families, and celebrations — styled with the clarity of a Google review."
           />
           <ReviewFilter value={category} onChange={setCategory} />
         </AnimatedSection>

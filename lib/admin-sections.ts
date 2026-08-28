@@ -54,8 +54,13 @@ export const adminSections: AdminSection[] = [
   {
     slug: "hero",
     title: "Home — Hero",
-    description: "Full-viewport image on the homepage.",
-    slots: [{ id: "home", label: "Hero image", path: "hero/home.jpg" }],
+    description: "Full-viewport rotating slideshow on the homepage.",
+    slots: [
+      { id: "slide-1", label: "Slide 1", path: "hero/slide-1.jpg" },
+      { id: "slide-2", label: "Slide 2", path: "hero/slide-2.jpg" },
+      { id: "slide-3", label: "Slide 3", path: "hero/slide-3.jpg" },
+      { id: "slide-4", label: "Slide 4", path: "hero/slide-4.jpg" },
+    ],
   },
   {
     slug: "cta",
@@ -78,7 +83,7 @@ export const adminSections: AdminSection[] = [
       { id: "engagement", label: "Engagement", path: "services/engagement.jpg" },
       { id: "pre-wedding", label: "Pre Wedding", path: "services/pre-wedding.jpg" },
       { id: "baby", label: "Baby Shoot", path: "services/baby.jpg" },
-      { id: "maternity", label: "Maternity", path: "services/maternity.jpg" },
+      { id: "maternity", label: "Babyshower / Maternity", path: "services/maternity.jpg" },
     ],
   },
   {
@@ -98,7 +103,7 @@ export const adminSections: AdminSection[] = [
       { id: "engagement", label: "Engagement", path: "portfolio-categories/engagement.jpg" },
       { id: "pre-wedding", label: "Pre Wedding", path: "portfolio-categories/pre-wedding.jpg" },
       { id: "baby", label: "Baby", path: "portfolio-categories/baby.jpg" },
-      { id: "maternity", label: "Maternity", path: "portfolio-categories/maternity.jpg" },
+      { id: "maternity", label: "Babyshower / Maternity", path: "portfolio-categories/maternity.jpg" },
     ],
   },
   ...galleryGroups,

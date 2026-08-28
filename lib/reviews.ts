@@ -6,7 +6,7 @@ export const REVIEW_FILTERS: { value: ReviewFilter; label: string }[] = [
   { value: "engagement", label: "Engagement" },
   { value: "pre-wedding", label: "Pre Wedding" },
   { value: "baby", label: "Baby" },
-  { value: "maternity", label: "Maternity" },
+  { value: "maternity", label: "Babyshower / Maternity" },
 ];
 
 export const REVIEW_CATEGORY_LABELS: Record<ReviewCategory, string> = {
@@ -14,7 +14,7 @@ export const REVIEW_CATEGORY_LABELS: Record<ReviewCategory, string> = {
   engagement: "Engagement",
   "pre-wedding": "Pre Wedding",
   baby: "Baby",
-  maternity: "Maternity",
+  maternity: "Babyshower / Maternity",
   corporate: "Corporate",
   birthday: "Birthday",
 };

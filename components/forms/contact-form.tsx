@@ -32,6 +32,7 @@ export function ContactForm({ onSubmit, defaultEventType }: ContactFormProps) {
   const [status, setStatus] = React.useState<"idle" | "success" | "error">(
     "idle",
   );
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   const {
     register,
@@ -55,7 +56,15 @@ export function ContactForm({ onSubmit, defaultEventType }: ContactFormProps) {
       if (onSubmit) {
         await onSubmit(values);
       } else {
-        await new Promise((resolve) => setTimeout(resolve, 700));
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error ?? "Failed to send message");
+        }
       }
       reset({
         name: "",
@@ -65,7 +74,10 @@ export function ContactForm({ onSubmit, defaultEventType }: ContactFormProps) {
         message: "",
       });
       setStatus("success");
-    } catch {
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error ? err.message : "Something went wrong. Please try again.",
+      );
       setStatus("error");
     }
   });
@@ -179,7 +191,7 @@ export function ContactForm({ onSubmit, defaultEventType }: ContactFormProps) {
 
               {status === "error" ? (
                 <p className="text-sm text-destructive" role="alert">
-                  Something went wrong. Please try again.
+                  {errorMessage ?? "Something went wrong. Please try again."}
                 </p>
               ) : null}
             </form>

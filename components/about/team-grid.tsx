@@ -27,9 +27,9 @@ export function TeamGrid({ members }: TeamGridProps) {
         <AnimatedSection>
           <SectionHeading
             align="center"
-            eyebrow="Meet the team"
-            title="The people behind the lens"
-            description="The steady hand and eye behind every session — candid, unhurried, and focused on your story."
+            eyebrow="Our founder"
+            title="The person behind the vision"
+            description="Crafting stories with intention, emotion, and a deep appreciation for the people behind every moment."
             className="mx-auto items-center"
           />
         </AnimatedSection>
@@ -37,7 +37,7 @@ export function TeamGrid({ members }: TeamGridProps) {
         <div
           className={
             isSingle
-              ? "mx-auto mt-14 max-w-sm"
+              ? "mt-14"
               : "mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           }
         >
@@ -52,28 +52,55 @@ export function TeamGrid({ members }: TeamGridProps) {
                 delay: index * 0.1,
                 ease: EASE_OUT_SOFT,
               }}
-              className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow duration-500 hover:shadow-md"
+              className={
+                isSingle
+                  ? "group grid grid-cols-1 overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow duration-500 hover:shadow-md sm:grid-cols-[2fr_3fr]"
+                  : "group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow duration-500 hover:shadow-md"
+              }
             >
-              <div className="relative aspect-[4/5] overflow-hidden bg-secondary">
+              <div
+                className={
+                  isSingle
+                    ? "relative aspect-4/5 self-start overflow-hidden bg-secondary"
+                    : "relative aspect-4/5 overflow-hidden bg-secondary"
+                }
+              >
                 <Image
                   src={member.avatar}
                   alt={member.name}
                   fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  sizes={
+                    isSingle
+                      ? "(max-width: 640px) 100vw, 40vw"
+                      : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  }
                   loading="lazy"
                   className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
                 />
               </div>
-              <div className="p-6 md:p-8">
+              <div
+                className={
+                  isSingle
+                    ? "flex min-h-0 flex-col justify-start overflow-y-auto px-6 py-8 md:px-8 md:py-10 lg:px-10 lg:py-12"
+                    : "p-6 md:p-8"
+                }
+              >
                 <p className="text-xs font-medium uppercase tracking-[0.16em] text-primary">
                   {member.role}
                 </p>
                 <h3 className="mt-2 font-serif text-2xl font-semibold">
                   {member.name}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {member.bio}
-                </p>
+                <div className="mt-3 space-y-3">
+                  {member.bio.split("\n\n").map((paragraph, i) => (
+                    <p
+                      key={i}
+                      className="text-base leading-relaxed text-muted-foreground"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
                 {member.specialties?.length ? (
                   <ul className="mt-5 flex flex-wrap gap-2">
                     {member.specialties.map((specialty) => (

@@ -16,12 +16,12 @@ export const SITE_CONFIG = {
   phoneE164: "919384816570",
   whatsapp: "https://wa.me/919384816570",
   instagram: "https://www.instagram.com/fotolites_studio_?igsh=eXdzZWdjODFkMmx4",
+  instagramHandle: "fotolites_studio_",
   address:
     "12A, West Vanniar 1st Cross Street, Nasapakkam, K.K.Nagar, Chennai - 600078.",
   hours: {
-    weekdays: "Mon – Fri, 10:00 – 18:00",
-    weekend: "Sat by appointment",
-    note: "Sundays reserved for weddings & events",
+    weekdays: "Mon – Sat, 10:00 AM – 8:30 PM",
+    weekend: "Sunday by appointment",
   },
   mapEmbedUrl:
     "https://www.google.com/maps?q=12A+West+Vanniar+1st+Cross+Street,+Nasapakkam,+K.K.Nagar,+Chennai+-+600078&output=embed",
@@ -48,10 +48,10 @@ export const NAV_LINKS: NavLink[] = [
  */
 export const SERVICE_LINKS: NavLink[] = [
   { label: "Wedding", href: "/portfolio?category=wedding" },
-  { label: "Engagement", href: "/portfolio?category=engagement" },
   { label: "Pre Wedding", href: "/portfolio?category=pre-wedding" },
+  { label: "Engagement", href: "/portfolio?category=engagement" },
+  { label: "Babyshower / Maternity", href: "/portfolio?category=maternity" },
   { label: "Baby", href: "/portfolio?category=baby" },
-  { label: "Maternity", href: "/portfolio?category=maternity" },
 ];
 
 /**
