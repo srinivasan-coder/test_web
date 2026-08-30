@@ -77,6 +77,9 @@ export function ContactInfo() {
         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
           Tell us about your special day or what you&apos;re planning.
         </p>
+        <p className="mt-1 text-sm text-muted-foreground">
+          We typically reply within two business days.
+        </p>
       </div>
 
       <ul className="space-y-5">
