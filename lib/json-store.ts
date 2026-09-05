@@ -1,4 +1,4 @@
-import { db } from "@/lib/firebase-admin";
+import { getDb } from "@/lib/firebase-admin";
 
 function splitPath(pathname: string): { collection: string; doc: string } {
   const parts = pathname.split("/");
@@ -15,7 +15,7 @@ function splitPath(pathname: string): { collection: string; doc: string } {
 export async function readJsonDoc<T>(pathname: string, fallback: T): Promise<T> {
   try {
     const { collection, doc } = splitPath(pathname);
-    const snap = await db.collection(collection).doc(doc).get();
+    const snap = await getDb().collection(collection).doc(doc).get();
     if (!snap.exists) return fallback;
     const value = snap.data()?.value;
     return value === undefined ? fallback : (value as T);
@@ -27,5 +27,5 @@ export async function readJsonDoc<T>(pathname: string, fallback: T): Promise<T> 
 /** Overwrites the JSON value at a fixed logical pathname. */
 export async function writeJsonDoc(pathname: string, data: unknown): Promise<void> {
   const { collection, doc } = splitPath(pathname);
-  await db.collection(collection).doc(doc).set({ value: data });
+  await getDb().collection(collection).doc(doc).set({ value: data });
 }
