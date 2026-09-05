@@ -29,9 +29,9 @@ const nextConfig: NextConfig = {
     localPatterns: [{ pathname: "/assets/**" }],
     remotePatterns: [
       {
-        // Admin-uploaded images live in Vercel Blob storage.
+        // Admin-uploaded images live in Cloudinary.
         protocol: "https",
-        hostname: "*.public.blob.vercel-storage.com",
+        hostname: "res.cloudinary.com",
       },
     ],
   },

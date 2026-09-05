@@ -1,4 +1,4 @@
-import { readJsonBlob, writeJsonBlob } from "@/lib/blob-store";
+import { readJsonDoc, writeJsonDoc } from "@/lib/json-store";
 
 import type { Gallery } from "@/types/gallery";
 import type { TeamMember } from "@/types/team";
@@ -18,7 +18,7 @@ function key(section: string, slotId: string): string {
 }
 
 async function readOverrides(): Promise<Overrides> {
-  return readJsonBlob<Overrides>(MANIFEST_PATHNAME, {});
+  return readJsonDoc<Overrides>(MANIFEST_PATHNAME, {});
 }
 
 /** All current overrides — one Blob read, reused across a whole page render. */
@@ -36,7 +36,7 @@ function resolve(overrides: Overrides, section: string, slotId: string, fallback
 export async function setImageOverride(section: string, slotId: string, filePath: string): Promise<void> {
   const overrides = await readOverrides();
   overrides[key(section, slotId)] = { path: filePath, updatedAt: Date.now() };
-  await writeJsonBlob(MANIFEST_PATHNAME, overrides);
+  await writeJsonDoc(MANIFEST_PATHNAME, overrides);
 }
 
 /** Resolves a single fixed-slot image (hero, cta, about studio story). */

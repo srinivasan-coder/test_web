@@ -1,4 +1,4 @@
-import { readJsonBlob, writeJsonBlob } from "@/lib/blob-store";
+import { readJsonDoc, writeJsonDoc } from "@/lib/json-store";
 
 import { galleries as seedGalleries } from "@/data/gallery";
 import { team as seedTeam } from "@/data/team";
@@ -17,13 +17,13 @@ import type { Review } from "@/types/review";
 import type { InstagramPost } from "@/types/instagram";
 
 async function readStore<T>(file: string): Promise<T[]> {
-  return readJsonBlob<T[]>(`data-db/${file}`, []);
+  return readJsonDoc<T[]>(`data-db/${file}`, []);
 }
 
 async function appendToStore<T extends { id: string }>(file: string, item: T): Promise<void> {
   const existing = await readStore<T>(file);
   existing.push(item);
-  await writeJsonBlob(`data-db/${file}`, existing);
+  await writeJsonDoc(`data-db/${file}`, existing);
 }
 
 /** Turns "A New Gallery!" into "a-new-gallery", de-duped against a list of taken slugs. */
