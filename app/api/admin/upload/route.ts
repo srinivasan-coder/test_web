@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getSlot } from "@/lib/admin-sections";
-import { saveUploadedImage, UploadValidationError } from "@/lib/admin-upload";
+import { saveUploadedImage, saveUploadedVideo, UploadValidationError } from "@/lib/admin-upload";
 import { setImageOverride } from "@/lib/site-images";
 
 export const runtime = "nodejs";
@@ -24,7 +24,10 @@ export async function POST(request: Request) {
     // serving stale bytes, and reusing a path Next's dev server has already
     // served avoids a dev-mode race where a brand-new file can momentarily
     // read back empty through the image optimizer's internal request replay.
-    const savedPath = await saveUploadedImage(formData.get("file"), slot.path);
+    const savedPath =
+      slot.kind === "video"
+        ? await saveUploadedVideo(formData.get("file"), slot.path)
+        : await saveUploadedImage(formData.get("file"), slot.path);
     await setImageOverride(section, slotId, savedPath);
 
     return NextResponse.json({ ok: true, path: savedPath, updatedAt: Date.now() });

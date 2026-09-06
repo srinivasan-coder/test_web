@@ -42,6 +42,10 @@ const nextConfig: NextConfig = {
       "embla-carousel-react",
       "yet-another-react-lightbox",
     ],
+    // Requests through proxy.ts (all /admin and /api/admin routes) are capped
+    // at 10MB by default — raised so a 20MB video/image upload isn't silently
+    // truncated before it reaches lib/admin-upload.ts's own size check.
+    proxyClientMaxBodySize: "25mb",
   },
   async headers() {
     return [

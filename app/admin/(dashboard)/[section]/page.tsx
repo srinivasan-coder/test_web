@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getSection } from "@/lib/admin-sections";
 import { SlotUploader } from "@/components/admin/slot-uploader";
+import { VideoSlotUploader } from "@/components/admin/video-slot-uploader";
 import { resolveSingleImage } from "@/lib/site-images";
 
 // The current image per slot lives in data/db/site-images.json — read it
@@ -20,7 +21,12 @@ export default async function AdminSectionPage({
   const slotsWithSrc = await Promise.all(
     section.slots.map(async (slot) => ({
       slot,
-      src: await resolveSingleImage(section.slug, slot.id, `/assets/${slot.path}`),
+      // Video slots have no locally-shipped fallback asset, unlike images.
+      src: await resolveSingleImage(
+        section.slug,
+        slot.id,
+        slot.kind === "video" ? "" : `/assets/${slot.path}`,
+      ),
     })),
   );
 
@@ -33,9 +39,13 @@ export default async function AdminSectionPage({
       <p className="mt-1 text-sm text-muted-foreground">{section.description}</p>
 
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {slotsWithSrc.map(({ slot, src }) => (
-          <SlotUploader key={slot.id} section={section.slug} slot={slot} initialSrc={src} />
-        ))}
+        {slotsWithSrc.map(({ slot, src }) =>
+          slot.kind === "video" ? (
+            <VideoSlotUploader key={slot.id} section={section.slug} slot={slot} initialSrc={src} />
+          ) : (
+            <SlotUploader key={slot.id} section={section.slug} slot={slot} initialSrc={src} />
+          ),
+        )}
       </div>
     </div>
   );

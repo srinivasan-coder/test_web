@@ -41,7 +41,7 @@ export interface Review {
 }
 
 /**
- * Video testimonial placeholder for the Reviews carousel.
+ * A video testimonial for the Reviews carousel.
  */
 export interface VideoTestimonial {
   id: string;
@@ -52,6 +52,8 @@ export interface VideoTestimonial {
   poster: string;
   duration: string;
   quote: string;
+  /** Uploaded via the admin panel; absent until an admin adds one. */
+  videoUrl?: string;
 }
 
 /**

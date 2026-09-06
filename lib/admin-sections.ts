@@ -3,6 +3,8 @@ export type AdminSlot = {
   label: string;
   /** Path relative to /public/assets */
   path: string;
+  /** Defaults to "image" when omitted. */
+  kind?: "image" | "video";
 };
 
 export type AdminSection = {
@@ -126,12 +128,16 @@ export const adminSections: AdminSection[] = [
   {
     slug: "video-testimonials",
     title: "Video Testimonials",
-    description: "Poster frame for each video testimonial.",
+    description: "Poster frame and video file for each testimonial.",
     slots: [
-      { id: "vt-1", label: "Ella & James — Wedding Film", path: "video-testimonials/vt-1.jpg" },
-      { id: "vt-2", label: "Maison Noir — Brand Stories", path: "video-testimonials/vt-2.jpg" },
-      { id: "vt-3", label: "First Light — Baby Session", path: "video-testimonials/vt-3.jpg" },
-      { id: "vt-4", label: "Turning One — Birthday Recap", path: "video-testimonials/vt-4.jpg" },
+      { id: "vt-1", label: "Ella & James — Wedding Film (poster)", path: "video-testimonials/vt-1.jpg" },
+      { id: "vt-1-video", label: "Ella & James — Wedding Film (video)", path: "video-testimonials/vt-1.mp4", kind: "video" },
+      { id: "vt-2", label: "Maison Noir — Brand Stories (poster)", path: "video-testimonials/vt-2.jpg" },
+      { id: "vt-2-video", label: "Maison Noir — Brand Stories (video)", path: "video-testimonials/vt-2.mp4", kind: "video" },
+      { id: "vt-3", label: "First Light — Baby Session (poster)", path: "video-testimonials/vt-3.jpg" },
+      { id: "vt-3-video", label: "First Light — Baby Session (video)", path: "video-testimonials/vt-3.mp4", kind: "video" },
+      { id: "vt-4", label: "Turning One — Birthday Recap (poster)", path: "video-testimonials/vt-4.jpg" },
+      { id: "vt-4-video", label: "Turning One — Birthday Recap (video)", path: "video-testimonials/vt-4.mp4", kind: "video" },
     ],
   },
   {

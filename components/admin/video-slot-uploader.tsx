@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
 import type { AdminSlot } from "@/lib/admin-sections";
 import { Button } from "@/components/ui/button";
 import { MAX_UPLOAD_BYTES, MAX_UPLOAD_LABEL } from "@/lib/upload-limits";
 
-export function SlotUploader({
+export function VideoSlotUploader({
   section,
   slot,
   initialSrc,
@@ -16,7 +15,6 @@ export function SlotUploader({
   initialSrc: string;
 }) {
   const [src, setSrc] = useState(initialSrc);
-  const [previewVersion, setPreviewVersion] = useState(0);
   const [status, setStatus] = useState<"idle" | "uploading" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -27,7 +25,7 @@ export function SlotUploader({
 
     if (file.size > MAX_UPLOAD_BYTES) {
       setStatus("error");
-      setError(`Image must be ${MAX_UPLOAD_LABEL} or smaller`);
+      setError(`Video must be ${MAX_UPLOAD_LABEL} or smaller`);
       if (inputRef.current) inputRef.current.value = "";
       return;
     }
@@ -49,27 +47,19 @@ export function SlotUploader({
       return;
     }
 
-    // The stored path is reused across uploads (recorded in
-    // data/db/site-images.json), so bump a local counter to force this
-    // preview to refetch — the same src string wouldn't otherwise re-render.
     setStatus("idle");
     setSrc(body.path);
-    setPreviewVersion((v) => v + 1);
     if (inputRef.current) inputRef.current.value = "";
   }
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-background">
-      <div className="relative aspect-[4/3] bg-secondary">
-        <Image
-          key={previewVersion}
-          src={previewVersion === 0 ? src : `${src}?t=${previewVersion}`}
-          alt={slot.label}
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover"
-          unoptimized
-        />
+      <div className="relative flex aspect-[4/3] items-center justify-center bg-secondary">
+        {src ? (
+          <video key={src} src={src} controls className="size-full object-cover" />
+        ) : (
+          <p className="px-4 text-center text-sm text-muted-foreground">No video uploaded yet</p>
+        )}
         {status === "uploading" && (
           <div className="absolute inset-0 flex items-center justify-center bg-ink/40 text-sm text-white">
             Uploading…
@@ -78,12 +68,12 @@ export function SlotUploader({
       </div>
       <div className="p-4">
         <p className="text-sm font-medium text-foreground">{slot.label}</p>
-        <p className="mt-1 text-xs text-muted-foreground">JPEG, PNG, or WebP — up to {MAX_UPLOAD_LABEL}</p>
+        <p className="mt-1 text-xs text-muted-foreground">MP4, WebM, or MOV — up to {MAX_UPLOAD_LABEL}</p>
         <label className="mt-3 block">
           <input
             ref={inputRef}
             type="file"
-            accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
+            accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov"
             className="sr-only"
             onChange={handleFileChange}
           />
@@ -95,7 +85,7 @@ export function SlotUploader({
             onClick={() => inputRef.current?.click()}
             disabled={status === "uploading"}
           >
-            Replace image
+            {src ? "Replace video" : "Upload video"}
           </Button>
         </label>
         {error && <p className="mt-2 text-xs text-destructive">{error}</p>}

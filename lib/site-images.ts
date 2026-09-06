@@ -107,10 +107,14 @@ export function resolveReviewSeedWith(overrides: Overrides, seed: Review[]): Rev
 
 export async function resolveVideoTestimonials(seed: VideoTestimonial[]): Promise<VideoTestimonial[]> {
   const overrides = await getImageOverrides();
-  return seed.map((v) => ({
-    ...v,
-    poster: resolve(overrides, "video-testimonials", v.id, v.poster),
-  }));
+  return seed.map((v) => {
+    const videoUrl = resolve(overrides, "video-testimonials", `${v.id}-video`, v.videoUrl ?? "");
+    return {
+      ...v,
+      poster: resolve(overrides, "video-testimonials", v.id, v.poster),
+      videoUrl: videoUrl || undefined,
+    };
+  });
 }
 
 export function resolveInstagramSeedWith(overrides: Overrides, seed: InstagramPost[]): InstagramPost[] {
