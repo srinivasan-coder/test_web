@@ -85,10 +85,10 @@ export default function AddReviewPage() {
             </label>
           </Field>
           <Field label="Avatar" hint="Optional">
-            <input type="file" name="avatar" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" />
+            <Input type="file" name="avatar" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" />
           </Field>
           <Field label="Story cover photo" hint="Optional — only needed if you added a story">
-            <input type="file" name="cover" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" />
+            <Input type="file" name="cover" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" />
           </Field>
         </AddContentForm>
       </div>

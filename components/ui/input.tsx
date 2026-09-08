@@ -18,7 +18,7 @@ function Input({ className, type = "text", ...props }: InputProps) {
         "hover:border-[color-mix(in_srgb,var(--color-line)_70%,var(--color-slate))]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         "disabled:cursor-not-allowed disabled:opacity-50",
-        "file:border-0 file:bg-transparent file:text-sm file:font-medium",
+        "file:mr-4 file:h-8 file:cursor-pointer file:rounded-full file:border-0 file:bg-secondary file:px-4 file:text-sm file:font-medium file:text-secondary-foreground file:transition-colors hover:file:bg-[color-mix(in_srgb,var(--color-surface)_55%,var(--color-line))]",
         className,
       )}
       {...props}

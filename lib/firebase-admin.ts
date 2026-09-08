@@ -2,6 +2,7 @@ import { cert, getApps, initializeApp, type App } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
 
 let app: App | undefined;
+let db: Firestore | undefined;
 
 // Deferred until first real use (not at module import time): Next.js imports
 // this module while collecting page data at build time, before deploy-time
@@ -24,5 +25,12 @@ function getFirebaseApp(): App {
 }
 
 export function getDb(): Firestore {
-  return getFirestore(getFirebaseApp());
+  if (!db) {
+    db = getFirestore(getFirebaseApp());
+    // Optional fields across the admin add-content forms (location, client,
+    // tags, specialties, ...) come through as `undefined` when left blank —
+    // Firestore rejects `undefined` outright otherwise, crashing the write.
+    db.settings({ ignoreUndefinedProperties: true });
+  }
+  return db;
 }

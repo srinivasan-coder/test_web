@@ -22,7 +22,7 @@ export default function AddInstagramPostPage() {
             <Input name="href" placeholder="https://instagram.com/p/..." />
           </Field>
           <Field label="Photo" required>
-            <input type="file" name="image" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required />
+            <Input type="file" name="image" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required />
           </Field>
         </AddContentForm>
       </div>

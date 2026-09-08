@@ -72,13 +72,13 @@ export default function AddGalleryPage() {
             </label>
           </Field>
           <Field label="Cover image" required>
-            <input type="file" name="cover" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required />
+            <Input type="file" name="cover" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required />
           </Field>
           <Field label="Cover alt text" hint="Describes the cover image for accessibility">
             <Input name="coverAlt" />
           </Field>
           <Field label="Additional photos" hint="Optional — add as many as you like">
-            <input
+            <Input
               type="file"
               name="photos"
               accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"

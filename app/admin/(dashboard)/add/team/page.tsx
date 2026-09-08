@@ -32,7 +32,7 @@ export default function AddTeamMemberPage() {
             </label>
           </Field>
           <Field label="Avatar" required>
-            <input type="file" name="avatar" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required />
+            <Input type="file" name="avatar" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" required />
           </Field>
         </AddContentForm>
       </div>
