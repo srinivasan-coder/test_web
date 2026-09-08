@@ -103,16 +103,17 @@ export type SignedUpload = {
   signature: string;
   publicId: string;
   format: string;
-  maxFileSize: number;
   resourceType: "image" | "video";
 };
 
 /**
  * Signs the params for a browser-to-Cloudinary direct upload, so large
  * files (video especially) never pass through our own serverless function
- * and its ~4.5MB request body cap. Enforces the same type/size restriction
- * as {@link saveUploadedImage}/{@link saveUploadedVideo} — Cloudinary itself
- * rejects anything over `maxFileSize` or signed to a disallowed `format`.
+ * and its ~4.5MB request body cap. Type restriction is enforced by signing
+ * a fixed `format` (Cloudinary rejects content it can't store as that
+ * format); size restriction can't be signed the same way — Cloudinary
+ * excludes `max_file_size` from signature verification outside of upload
+ * presets — so it's enforced after the fact by {@link enforceUploadedSize}.
  */
 export function createUploadSignature(
   pathnameHint: string,
@@ -133,7 +134,7 @@ export function createUploadSignature(
     pathnameHint.replace(/\.[^./]+$/, "") + "-" + crypto.randomBytes(4).toString("hex");
   const timestamp = Math.floor(Date.now() / 1000);
   const signature = cloudinary.utils.api_sign_request(
-    { public_id: publicId, format, max_file_size: MAX_UPLOAD_BYTES, timestamp },
+    { public_id: publicId, format, timestamp },
     process.env.CLOUDINARY_API_SECRET!,
   );
 
@@ -144,7 +145,6 @@ export function createUploadSignature(
     signature,
     publicId,
     format,
-    maxFileSize: MAX_UPLOAD_BYTES,
     resourceType,
   };
 }

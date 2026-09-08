@@ -8,7 +8,6 @@ export type SignedUpload = {
   signature: string;
   publicId: string;
   format: string;
-  maxFileSize: number;
   resourceType: "image" | "video";
 };
 
@@ -21,7 +20,6 @@ export async function uploadDirectToCloudinary(file: File, signed: SignedUpload)
   formData.set("signature", signed.signature);
   formData.set("public_id", signed.publicId);
   formData.set("format", signed.format);
-  formData.set("max_file_size", String(signed.maxFileSize));
 
   const res = await fetch(`https://api.cloudinary.com/v1_1/${signed.cloudName}/${signed.resourceType}/upload`, {
     method: "POST",
