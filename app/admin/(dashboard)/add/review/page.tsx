@@ -42,8 +42,6 @@ export default function AddReviewPage() {
                 <option value="pre-wedding">Pre Wedding</option>
                 <option value="baby">Baby</option>
                 <option value="maternity">Babyshower / Maternity</option>
-                <option value="corporate">Corporate</option>
-                <option value="birthday">Birthday</option>
               </Select>
             </Field>
             <Field label="Rating" required>

@@ -30,12 +30,10 @@ export default function AddGalleryPage() {
                   Choose…
                 </option>
                 <option value="wedding">Wedding</option>
-                <option value="engagement">Engagement</option>
                 <option value="pre-wedding">Pre Wedding</option>
+                <option value="engagement">Engagement</option>
                 <option value="baby">Baby</option>
                 <option value="maternity">Babyshower / Maternity</option>
-                <option value="corporate">Corporate</option>
-                <option value="fashion">Fashion</option>
               </Select>
             </Field>
             <Field label="Orientation" required>
