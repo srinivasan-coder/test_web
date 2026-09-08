@@ -1,23 +1,17 @@
 import crypto from "node:crypto";
 import { v2 as cloudinary, type UploadApiResponse } from "cloudinary";
-import { MAX_UPLOAD_BYTES, MAX_UPLOAD_LABEL } from "@/lib/upload-limits";
+import {
+  IMAGE_FORMAT_BY_MIME,
+  MAX_UPLOAD_BYTES,
+  MAX_UPLOAD_LABEL,
+  VIDEO_FORMAT_BY_MIME,
+} from "@/lib/upload-limits";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-
-const IMAGE_FORMAT_BY_MIME: Record<string, string> = {
-  "image/jpeg": "jpg",
-  "image/png": "png",
-  "image/webp": "webp",
-};
-const VIDEO_FORMAT_BY_MIME: Record<string, string> = {
-  "video/mp4": "mp4",
-  "video/webm": "webm",
-  "video/quicktime": "mov",
-};
 
 export class UploadValidationError extends Error {}
 
@@ -100,6 +94,81 @@ export async function saveUploadedVideo(
     "video",
     "Only MP4, WebM, or MOV videos are allowed",
   );
+}
+
+export type SignedUpload = {
+  cloudName: string;
+  apiKey: string;
+  timestamp: number;
+  signature: string;
+  publicId: string;
+  format: string;
+  maxFileSize: number;
+  resourceType: "image" | "video";
+};
+
+/**
+ * Signs the params for a browser-to-Cloudinary direct upload, so large
+ * files (video especially) never pass through our own serverless function
+ * and its ~4.5MB request body cap. Enforces the same type/size restriction
+ * as {@link saveUploadedImage}/{@link saveUploadedVideo} — Cloudinary itself
+ * rejects anything over `maxFileSize` or signed to a disallowed `format`.
+ */
+export function createUploadSignature(
+  pathnameHint: string,
+  resourceType: "image" | "video",
+  mimeType: string,
+): SignedUpload {
+  const formatByMime = resourceType === "video" ? VIDEO_FORMAT_BY_MIME : IMAGE_FORMAT_BY_MIME;
+  const format = formatByMime[mimeType];
+  if (!format) {
+    throw new UploadValidationError(
+      resourceType === "video"
+        ? "Only MP4, WebM, or MOV videos are allowed"
+        : "Only JPEG, PNG, or WebP images are allowed",
+    );
+  }
+
+  const publicId =
+    pathnameHint.replace(/\.[^./]+$/, "") + "-" + crypto.randomBytes(4).toString("hex");
+  const timestamp = Math.floor(Date.now() / 1000);
+  const signature = cloudinary.utils.api_sign_request(
+    { public_id: publicId, format, max_file_size: MAX_UPLOAD_BYTES, timestamp },
+    process.env.CLOUDINARY_API_SECRET!,
+  );
+
+  return {
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME!,
+    apiKey: process.env.CLOUDINARY_API_KEY!,
+    timestamp,
+    signature,
+    publicId,
+    format,
+    maxFileSize: MAX_UPLOAD_BYTES,
+    resourceType,
+  };
+}
+
+/**
+ * Cloudinary's `max_file_size` upload parameter only applies to upload
+ * presets, not ad-hoc signed uploads, so it can't be relied on to enforce
+ * our 20MB cap for the direct browser-to-Cloudinary upload. This asks
+ * Cloudinary for the resource's actual stored size (never trusting a
+ * client-supplied number) and deletes it if it's over the limit, matching
+ * the same restriction {@link saveUploadedImage}/{@link saveUploadedVideo}
+ * enforce for the server-buffered upload path.
+ */
+export async function enforceUploadedSize(
+  publicId: string,
+  resourceType: "image" | "video",
+): Promise<void> {
+  const resource = await cloudinary.api.resource(publicId, { resource_type: resourceType });
+  if (resource.bytes > MAX_UPLOAD_BYTES) {
+    await cloudinary.uploader.destroy(publicId, { resource_type: resourceType }).catch(() => {});
+    throw new UploadValidationError(
+      `${resourceType === "video" ? "Video" : "Image"} must be ${MAX_UPLOAD_LABEL} or smaller`,
+    );
+  }
 }
 
 export function parseTags(value: FormDataEntryValue | null): string[] | undefined {

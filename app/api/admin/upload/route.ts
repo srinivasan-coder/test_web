@@ -1,40 +1,44 @@
 import { NextResponse } from "next/server";
 import { getSlot } from "@/lib/admin-sections";
-import { saveUploadedImage, saveUploadedVideo, UploadValidationError } from "@/lib/admin-upload";
+import { enforceUploadedSize, UploadValidationError } from "@/lib/admin-upload";
 import { setImageOverride } from "@/lib/site-images";
 
 export const runtime = "nodejs";
 
+// The file itself is uploaded straight from the browser to Cloudinary (see
+// /api/admin/upload/sign) so it never has to pass through this function's
+// request body — Vercel caps that at ~4.5MB, well under our 20MB limit.
+// This route records the resulting Cloudinary URL against the slot, after
+// independently verifying with Cloudinary that the upload didn't exceed our
+// size cap (the signed upload can't enforce that itself — see enforceUploadedSize).
 export async function POST(request: Request) {
-  const formData = await request.formData();
-  const section = String(formData.get("section") ?? "");
-  const slotId = String(formData.get("slotId") ?? "");
+  const body = await request.json().catch(() => null);
+  const section = String(body?.section ?? "");
+  const slotId = String(body?.slotId ?? "");
+  const url = String(body?.url ?? "");
+  const publicId = String(body?.publicId ?? "");
 
   // slot.path comes from our own manifest (lib/admin-sections.ts), never from
-  // user input, so this stays confined to public/assets regardless of the
-  // requested section/slotId strings.
+  // user input, so this stays confined to the intended upload target.
   const slot = getSlot(section, slotId);
   if (!slot) {
     return NextResponse.json({ error: "Unknown section/slot" }, { status: 400 });
   }
 
-  try {
-    // Reuse the slot's fixed path (not a new filename per upload) — the
-    // must-revalidate Cache-Control on /assets/* already stops browsers from
-    // serving stale bytes, and reusing a path Next's dev server has already
-    // served avoids a dev-mode race where a brand-new file can momentarily
-    // read back empty through the image optimizer's internal request replay.
-    const savedPath =
-      slot.kind === "video"
-        ? await saveUploadedVideo(formData.get("file"), slot.path)
-        : await saveUploadedImage(formData.get("file"), slot.path);
-    await setImageOverride(section, slotId, savedPath);
+  const expectedPrefix = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`;
+  if (!url.startsWith(expectedPrefix)) {
+    return NextResponse.json({ error: "Invalid upload URL" }, { status: 400 });
+  }
 
-    return NextResponse.json({ ok: true, path: savedPath, updatedAt: Date.now() });
+  try {
+    await enforceUploadedSize(publicId, slot.kind === "video" ? "video" : "image");
   } catch (err) {
     if (err instanceof UploadValidationError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }
     throw err;
   }
+
+  await setImageOverride(section, slotId, url);
+  return NextResponse.json({ ok: true, path: url, updatedAt: Date.now() });
 }

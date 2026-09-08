@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import type { AdminSlot } from "@/lib/admin-sections";
 import { Button } from "@/components/ui/button";
+import { uploadDirectToCloudinary, type SignedUpload } from "@/lib/cloudinary-client-upload";
 import { MAX_UPLOAD_BYTES, MAX_UPLOAD_LABEL } from "@/lib/upload-limits";
 
 export function VideoSlotUploader({
@@ -33,23 +34,33 @@ export function VideoSlotUploader({
     setStatus("uploading");
     setError(null);
 
-    const formData = new FormData();
-    formData.set("section", section);
-    formData.set("slotId", slot.id);
-    formData.set("file", file);
+    try {
+      const signRes = await fetch("/api/admin/upload/sign", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section, slotId: slot.id, mimeType: file.type }),
+      });
+      const signed: SignedUpload & { error?: string } = await signRes.json();
+      if (!signRes.ok) throw new Error(signed.error ?? "Upload failed");
 
-    const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
-    const body = await res.json().catch(() => ({}));
+      const url = await uploadDirectToCloudinary(file, signed);
 
-    if (!res.ok) {
+      const finalizeRes = await fetch("/api/admin/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ section, slotId: slot.id, url, publicId: signed.publicId }),
+      });
+      const finalizeBody = await finalizeRes.json().catch(() => ({}));
+      if (!finalizeRes.ok) throw new Error(finalizeBody.error ?? "Upload failed");
+
+      setStatus("idle");
+      setSrc(finalizeBody.path);
+    } catch (err) {
       setStatus("error");
-      setError(body.error ?? "Upload failed");
-      return;
+      setError(err instanceof Error ? err.message : "Upload failed");
+    } finally {
+      if (inputRef.current) inputRef.current.value = "";
     }
-
-    setStatus("idle");
-    setSrc(body.path);
-    if (inputRef.current) inputRef.current.value = "";
   }
 
   return (
