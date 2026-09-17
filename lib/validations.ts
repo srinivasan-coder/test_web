@@ -21,7 +21,6 @@ export const contactSchema = z.object({
       "pre-wedding",
       "baby",
       "maternity",
-      "birthday",
       "other",
     ],
     { message: "Please select an event type." },
@@ -43,7 +42,6 @@ export const EVENT_TYPE_OPTIONS: {
   { value: "pre-wedding", label: "Pre Wedding" },
   { value: "baby", label: "Baby Shoot" },
   { value: "maternity", label: "Babyshower / Maternity" },
-  { value: "birthday", label: "Birthday" },
   { value: "other", label: "Something else" },
 ];
 

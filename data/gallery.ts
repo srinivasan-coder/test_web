@@ -314,6 +314,85 @@ export const galleries: Gallery[] = [
     ],
   },
   {
+    id: "g-before-baby",
+    slug: "before-baby",
+    title: "Before Baby",
+    description:
+      "Soft, unhurried maternity portraits framed in warm window light, honoring the quiet weeks before baby arrives.",
+    category: "maternity",
+    orientation: "landscape",
+    location: "Studio, San Francisco",
+    date: "2026-02-14",
+    featured: true,
+    tags: ["maternity", "studio", "natural light"],
+    cover: img(
+      "/assets/gallery/before-baby/cover.jpg",
+      "Expecting mother in a soft, natural-light portrait",
+      1600,
+      1062,
+    ),
+    images: [
+      img(
+        "/assets/gallery/before-baby/1.jpg",
+        "Expecting mother in a soft, natural-light portrait",
+        1600,
+        1062,
+      ),
+    ],
+  },
+  {
+    id: "g-a-quiet-anticipation",
+    slug: "a-quiet-anticipation",
+    title: "A Quiet Anticipation",
+    description:
+      "An intimate babyshower gathering told through candid, documentary frames — laughter, soft pastels, and anticipation.",
+    category: "maternity",
+    orientation: "landscape",
+    location: "Private residence, Palo Alto",
+    date: "2025-12-06",
+    tags: ["babyshower", "celebration", "family"],
+    cover: img(
+      "/assets/gallery/a-quiet-anticipation/cover.jpg",
+      "Family and friends gathered at a babyshower celebration",
+      1600,
+      1062,
+    ),
+    images: [
+      img(
+        "/assets/gallery/a-quiet-anticipation/1.jpg",
+        "Family and friends gathered at a babyshower celebration",
+        1600,
+        1062,
+      ),
+    ],
+  },
+  {
+    id: "g-blooming",
+    slug: "blooming",
+    title: "Blooming",
+    description:
+      "A golden-hour maternity session outdoors, tracing the last glowing weeks of pregnancy.",
+    category: "maternity",
+    orientation: "landscape",
+    location: "Golden Gate Park",
+    date: "2025-10-22",
+    tags: ["maternity", "outdoor", "golden hour"],
+    cover: img(
+      "/assets/gallery/blooming/cover.jpg",
+      "Expecting mother walking outdoors during golden hour",
+      1600,
+      1062,
+    ),
+    images: [
+      img(
+        "/assets/gallery/blooming/1.jpg",
+        "Expecting mother walking outdoors during golden hour",
+        1600,
+        1062,
+      ),
+    ],
+  },
+  {
     id: "g-boardroom-calm",
     slug: "boardroom-calm",
     title: "Boardroom Calm",
