@@ -11,6 +11,7 @@ import {
   resolveReviewSeedWith,
   resolveInstagramSeedWith,
 } from "@/lib/site-images";
+import { getGalleryOverrides } from "@/lib/gallery-overrides";
 import type { Gallery, GalleryCategory } from "@/types/gallery";
 import type { TeamMember } from "@/types/team";
 import type { Review } from "@/types/review";
@@ -46,11 +47,21 @@ export function slugify(input: string, taken: Set<string>): string {
 // --- Galleries ---------------------------------------------------------
 
 export async function getAllGalleries(): Promise<Gallery[]> {
-  const [overrides, added] = await Promise.all([
+  const [imageOverrides, galleryOverrides, added] = await Promise.all([
     getImageOverrides(),
+    getGalleryOverrides(),
     readStore<Gallery>("galleries.json"),
   ]);
-  return [...resolveGallerySeedWith(overrides, seedGalleries), ...added];
+  const seedResolved = resolveGallerySeedWith(imageOverrides, seedGalleries);
+  const merged: Array<Gallery & { hidden?: boolean }> = [...seedResolved, ...added].map((g) => {
+    const patch = galleryOverrides[g.id];
+    return patch ? { ...g, ...patch } : g;
+  });
+  return merged.filter((g) => !g.hidden);
+}
+
+export async function getGalleryByIdAsync(id: string): Promise<Gallery | undefined> {
+  return (await getAllGalleries()).find((g) => g.id === id);
 }
 
 export async function getFeaturedGalleries(): Promise<Gallery[]> {

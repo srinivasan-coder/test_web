@@ -14,47 +14,11 @@ export type AdminSection = {
   slots: AdminSlot[];
 };
 
-const galleries: { slug: string; title: string; imageCount: number }[] = [
-  { slug: "a-still-morning", title: "A Still Morning", imageCount: 3 },
-  { slug: "vows-in-linen", title: "Vows in Linen", imageCount: 2 },
-  { slug: "midnight-reception", title: "Midnight Reception", imageCount: 1 },
-  { slug: "city-promise", title: "City Promise", imageCount: 2 },
-  { slug: "harbor-light", title: "Harbor Light", imageCount: 1 },
-  { slug: "golden-hour-yes", title: "Golden Hour Yes", imageCount: 1 },
-  { slug: "before-the-aisle", title: "Before the Aisle", imageCount: 2 },
-  { slug: "desert-duet", title: "Desert Duet", imageCount: 1 },
-  { slug: "soft-beginnings", title: "Soft Beginnings", imageCount: 2 },
-  { slug: "first-light", title: "First Light", imageCount: 1 },
-  { slug: "tiny-toes", title: "Tiny Toes", imageCount: 1 },
-  { slug: "before-baby", title: "Before Baby", imageCount: 1 },
-  { slug: "a-quiet-anticipation", title: "A Quiet Anticipation", imageCount: 1 },
-  { slug: "blooming", title: "Blooming", imageCount: 1 },
-  { slug: "boardroom-calm", title: "Boardroom Calm", imageCount: 2 },
-  { slug: "team-in-motion", title: "Team in Motion", imageCount: 1 },
-  { slug: "founder-series", title: "Founder Series", imageCount: 1 },
-  { slug: "atelier-lines", title: "Atelier Lines", imageCount: 2 },
-  { slug: "runway-hush", title: "Runway Hush", imageCount: 1 },
-  { slug: "monochrome-muse", title: "Monochrome Muse", imageCount: 1 },
-  { slug: "ivory-afternoon", title: "Ivory Afternoon", imageCount: 1 },
-  { slug: "ring-and-rain", title: "Ring and Rain", imageCount: 1 },
-  { slug: "silk-and-steel", title: "Silk and Steel", imageCount: 1 },
-  { slug: "summit-portraits", title: "Summit Portraits", imageCount: 1 },
-];
-
-const galleryGroups: AdminSection[] = galleries.map((g) => ({
-  slug: `gallery-${g.slug}`,
-  title: `Gallery — ${g.title}`,
-  description: "Portfolio gallery cover and photos.",
-  slots: [
-    { id: "cover", label: "Cover", path: `gallery/${g.slug}/cover.jpg` },
-    ...Array.from({ length: g.imageCount }, (_, i) => ({
-      id: String(i + 1),
-      label: `Photo ${i + 1}`,
-      path: `gallery/${g.slug}/${i + 1}.jpg`,
-    })),
-  ],
-}));
-
+// Per-gallery image slots used to live here (one AdminSection per seed
+// gallery, e.g. "Gallery — A Still Morning"). That's now handled by Manage
+// Galleries (/admin/manage/galleries), which also covers text fields and
+// added (not just seed) galleries — see lib/gallery-overrides.ts. Keeping
+// both would let the two silently shadow each other's edits.
 export const adminSections: AdminSection[] = [
   {
     slug: "hero",
@@ -111,7 +75,6 @@ export const adminSections: AdminSection[] = [
       { id: "maternity", label: "Babyshower / Maternity", path: "portfolio-categories/maternity.jpg" },
     ],
   },
-  ...galleryGroups,
   {
     slug: "reviews",
     title: "Reviews",
