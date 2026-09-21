@@ -2,26 +2,26 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import type { AdminSlot } from "@/lib/admin-sections";
 import { Button } from "@/components/ui/button";
 import { uploadDirectToCloudinary, type SignedUpload } from "@/lib/cloudinary-client-upload";
 import { MAX_UPLOAD_BYTES, MAX_UPLOAD_LABEL } from "@/lib/upload-limits";
 
-export function SlotUploader({
-  section,
-  slot,
+/**
+ * Replaces one Instagram tile's photo — the instagram-edit equivalent of
+ * GalleryPhotoUploader (components/admin/gallery-photo-uploader.tsx), keyed
+ * by instagramId instead of galleryId+field since a tile has only one photo.
+ */
+export function InstagramPhotoUploader({
+  instagramId,
   initialSrc,
 }: {
-  section: string;
-  slot: AdminSlot;
+  instagramId: string;
   initialSrc: string;
 }) {
   const [src, setSrc] = useState(initialSrc);
   const [previewVersion, setPreviewVersion] = useState(0);
   const [status, setStatus] = useState<"idle" | "uploading" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
-  const [confirmingDelete, setConfirmingDelete] = useState(false);
-  const [deleting, setDeleting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -39,10 +39,10 @@ export function SlotUploader({
     setError(null);
 
     try {
-      const signRes = await fetch("/api/admin/upload/sign", {
+      const signRes = await fetch("/api/admin/upload/instagram-sign", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ section, slotId: slot.id, mimeType: file.type }),
+        body: JSON.stringify({ instagramId, mimeType: file.type }),
       });
       const signed: SignedUpload & { error?: string } = await signRes.json();
       if (!signRes.ok) throw new Error(signed.error ?? "Upload failed");
@@ -52,14 +52,11 @@ export function SlotUploader({
       const finalizeRes = await fetch("/api/admin/upload", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ section, slotId: slot.id, url, publicId: signed.publicId }),
+        body: JSON.stringify({ instagramId, url, publicId: signed.publicId }),
       });
       const finalizeBody = await finalizeRes.json().catch(() => ({}));
       if (!finalizeRes.ok) throw new Error(finalizeBody.error ?? "Upload failed");
 
-      // The stored path is reused across uploads (recorded in
-      // data/db/site-images.json), so bump a local counter to force this
-      // preview to refetch — the same src string wouldn't otherwise re-render.
       setStatus("idle");
       setSrc(finalizeBody.path);
       setPreviewVersion((v) => v + 1);
@@ -71,32 +68,13 @@ export function SlotUploader({
     }
   }
 
-  async function handleDelete() {
-    setDeleting(true);
-    setError(null);
-
-    const res = await fetch(`/api/admin/upload/${section}/${slot.id}`, { method: "DELETE" });
-    const body = await res.json().catch(() => ({}));
-
-    if (!res.ok) {
-      setDeleting(false);
-      setError(body.error ?? "Something went wrong");
-      return;
-    }
-
-    setDeleting(false);
-    setConfirmingDelete(false);
-    setSrc("/assets/no-image.svg");
-    setPreviewVersion((v) => v + 1);
-  }
-
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-background">
-      <div className="relative aspect-[4/3] bg-secondary">
+      <div className="relative aspect-square bg-secondary">
         <Image
           key={previewVersion}
           src={previewVersion === 0 ? src : `${src}?t=${previewVersion}`}
-          alt={slot.label}
+          alt="Instagram tile photo"
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover"
@@ -107,59 +85,9 @@ export function SlotUploader({
             Uploading…
           </div>
         )}
-        {!confirmingDelete && (
-          <button
-            type="button"
-            aria-label={`Delete ${slot.label}`}
-            onClick={() => setConfirmingDelete(true)}
-            className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full bg-ink/60 text-white backdrop-blur transition-colors hover:bg-destructive"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="size-4"
-            >
-              <path d="M3 6h18" />
-              <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-              <path d="M10 11v6" />
-              <path d="M14 11v6" />
-            </svg>
-          </button>
-        )}
-        {confirmingDelete && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/85 p-4 text-center backdrop-blur-sm">
-            <p className="text-xs text-white">Delete this image? This can&apos;t be undone.</p>
-            <div className="flex w-full gap-2 px-2">
-              <Button
-                type="button"
-                variant="inverse-outline"
-                size="sm"
-                className="flex-1"
-                onClick={() => setConfirmingDelete(false)}
-                disabled={deleting}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="button"
-                size="sm"
-                className="flex-1 bg-destructive text-destructive-foreground hover:bg-destructive/90"
-                onClick={handleDelete}
-                disabled={deleting}
-              >
-                {deleting ? "Deleting…" : "Delete"}
-              </Button>
-            </div>
-          </div>
-        )}
       </div>
       <div className="p-4">
-        <p className="text-sm font-medium text-foreground">{slot.label}</p>
+        <p className="text-sm font-medium text-foreground">Photo</p>
         <p className="mt-1 text-xs text-muted-foreground">JPEG, PNG, or WebP — up to {MAX_UPLOAD_LABEL}</p>
         <label className="mt-3 block">
           <input
@@ -177,7 +105,7 @@ export function SlotUploader({
             onClick={() => inputRef.current?.click()}
             disabled={status === "uploading"}
           >
-            Replace image
+            Replace photo
           </Button>
         </label>
         {error && <p className="mt-2 text-xs text-destructive">{error}</p>}

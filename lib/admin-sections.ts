@@ -14,11 +14,14 @@ export type AdminSection = {
   slots: AdminSlot[];
 };
 
-// Per-gallery image slots used to live here (one AdminSection per seed
-// gallery, e.g. "Gallery — A Still Morning"). That's now handled by Manage
-// Galleries (/admin/manage/galleries), which also covers text fields and
-// added (not just seed) galleries — see lib/gallery-overrides.ts. Keeping
-// both would let the two silently shadow each other's edits.
+// Per-gallery image slots and the Instagram Feed Preview grid used to live
+// here (one AdminSection per seed gallery, e.g. "Gallery — A Still
+// Morning", plus 6 "ig-N" tiles). Both are now handled by Manage Galleries
+// (/admin/manage/galleries) and Manage Instagram tiles
+// (/admin/manage/instagram), which also cover text fields and added (not
+// just seed) items — see lib/gallery-overrides.ts and
+// lib/instagram-overrides.ts. Keeping both systems would let them silently
+// shadow each other's edits.
 export const adminSections: AdminSection[] = [
   {
     slug: "hero",
@@ -105,16 +108,6 @@ export const adminSections: AdminSection[] = [
       { id: "vt-4", label: "Turning One — Birthday Recap (poster)", path: "video-testimonials/vt-4.jpg" },
       { id: "vt-4-video", label: "Turning One — Birthday Recap (video)", path: "video-testimonials/vt-4.mp4", kind: "video" },
     ],
-  },
-  {
-    slug: "instagram",
-    title: "Instagram Feed Preview",
-    description: "Six-tile Instagram preview grid on the homepage.",
-    slots: Array.from({ length: 6 }, (_, i) => ({
-      id: `ig-${i + 1}`,
-      label: `Tile ${i + 1}`,
-      path: `instagram/ig-${i + 1}.jpg`,
-    })),
   },
 ];
 

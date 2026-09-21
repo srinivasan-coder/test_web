@@ -12,6 +12,7 @@ import {
   resolveInstagramSeedWith,
 } from "@/lib/site-images";
 import { getGalleryOverrides } from "@/lib/gallery-overrides";
+import { getInstagramOverrides } from "@/lib/instagram-overrides";
 import type { Gallery, GalleryCategory } from "@/types/gallery";
 import type { TeamMember } from "@/types/team";
 import type { Review } from "@/types/review";
@@ -131,11 +132,23 @@ export async function addReview(review: Review): Promise<void> {
 // --- Instagram ---------------------------------------------------------------
 
 export async function getAllInstagramPosts(): Promise<InstagramPost[]> {
-  const [overrides, added] = await Promise.all([
+  const [overrides, instagramOverrides, added] = await Promise.all([
     getImageOverrides(),
+    getInstagramOverrides(),
     readStore<InstagramPost>("instagram.json"),
   ]);
-  return [...resolveInstagramSeedWith(overrides, seedInstagramPosts), ...added];
+  const seedResolved = resolveInstagramSeedWith(overrides, seedInstagramPosts);
+  const merged: Array<InstagramPost & { hidden?: boolean }> = [...seedResolved, ...added].map(
+    (post) => {
+      const patch = instagramOverrides[post.id];
+      return patch ? { ...post, ...patch } : post;
+    },
+  );
+  return merged.filter((post) => !post.hidden);
+}
+
+export async function getInstagramPostByIdAsync(id: string): Promise<InstagramPost | undefined> {
+  return (await getAllInstagramPosts()).find((post) => post.id === id);
 }
 
 export async function getInstagramIds(): Promise<Set<string>> {

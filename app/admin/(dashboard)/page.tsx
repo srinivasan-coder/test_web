@@ -43,7 +43,7 @@ export default async function AdminDashboardPage() {
 
       <h2 className="mt-12 text-2xl font-semibold text-foreground">Manage content</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Edit or remove galleries you&apos;ve already added or replaced.
+        Edit or remove galleries and Instagram tiles you&apos;ve already added or replaced.
       </p>
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Link
@@ -51,6 +51,13 @@ export default async function AdminDashboardPage() {
           className="flex flex-col rounded-2xl border border-dashed border-border bg-background p-4 transition-colors hover:border-[color-mix(in_srgb,var(--color-line)_65%,var(--color-slate))]"
         >
           <p className="font-medium text-foreground">Manage galleries</p>
+          <p className="text-sm text-muted-foreground">Edit details, replace photos, or delete</p>
+        </Link>
+        <Link
+          href="/admin/manage/instagram"
+          className="flex flex-col rounded-2xl border border-dashed border-border bg-background p-4 transition-colors hover:border-[color-mix(in_srgb,var(--color-line)_65%,var(--color-slate))]"
+        >
+          <p className="font-medium text-foreground">Manage Instagram tiles</p>
           <p className="text-sm text-muted-foreground">Edit details, replace photos, or delete</p>
         </Link>
       </div>
