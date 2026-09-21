@@ -4,6 +4,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Lives inside the (relative-positioned) thumbnail of a gallery card — a
+ * small icon in the corner of the photo, matching Sections' single clean
+ * "Replace image" button below rather than a second full-width text button.
+ * Confirming replaces the icon with a scrim over the photo itself, so the
+ * trigger and its confirm stay together without needing to lift state up
+ * to the parent card.
+ */
 export function DeleteGalleryButton({ id, title }: { id: string; title: string }) {
   const router = useRouter();
   const [confirming, setConfirming] = useState(false);
@@ -28,23 +36,42 @@ export function DeleteGalleryButton({ id, title }: { id: string; title: string }
 
   if (!confirming) {
     return (
-      <Button type="button" variant="outline" size="sm" onClick={() => setConfirming(true)}>
-        Delete
-      </Button>
+      <button
+        type="button"
+        aria-label={`Delete ${title}`}
+        onClick={() => setConfirming(true)}
+        className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full bg-ink/60 text-white backdrop-blur transition-colors hover:bg-destructive"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="size-4"
+        >
+          <path d="M3 6h18" />
+          <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+          <path d="M10 11v6" />
+          <path d="M14 11v6" />
+        </svg>
+      </button>
     );
   }
 
   return (
-    <div className="w-full space-y-2 rounded-xl border border-destructive/30 bg-destructive/5 p-3">
-      <p className="text-xs text-foreground">
+    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/85 p-4 text-center backdrop-blur-sm">
+      <p className="text-xs text-white">
         Delete <span className="font-medium">{title}</span>? It disappears from the portfolio
         immediately. This can&apos;t be undone.
       </p>
-      {error && <p className="text-xs text-destructive">{error}</p>}
-      <div className="flex gap-2">
+      {error && <p className="text-xs text-[color:#fca5a5]">{error}</p>}
+      <div className="flex w-full gap-2 px-2">
         <Button
           type="button"
-          variant="outline"
+          variant="inverse-outline"
           size="sm"
           className="flex-1"
           onClick={() => setConfirming(false)}

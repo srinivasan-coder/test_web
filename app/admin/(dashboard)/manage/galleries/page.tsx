@@ -34,6 +34,7 @@ export default async function ManageGalleriesPage() {
                 className="object-cover"
                 unoptimized
               />
+              <DeleteGalleryButton id={gallery.id} title={gallery.title} />
             </div>
             <div className="p-4">
               <p className="text-sm font-medium text-foreground">{gallery.title}</p>
@@ -41,15 +42,12 @@ export default async function ManageGalleriesPage() {
                 {gallery.category}
                 {gallery.location ? ` · ${gallery.location}` : ""}
               </p>
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <Link
-                  href={`/admin/manage/galleries/${gallery.id}/edit`}
-                  className="flex-1 rounded-full border border-border bg-background px-4 py-2 text-center text-sm font-medium text-foreground transition-colors hover:bg-secondary"
-                >
-                  Edit
-                </Link>
-                <DeleteGalleryButton id={gallery.id} title={gallery.title} />
-              </div>
+              <Link
+                href={`/admin/manage/galleries/${gallery.id}/edit`}
+                className="mt-3 block rounded-full border border-border bg-background px-4 py-2 text-center text-sm font-medium text-foreground transition-colors hover:bg-secondary"
+              >
+                Edit
+              </Link>
             </div>
           </div>
         ))}

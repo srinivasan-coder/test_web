@@ -103,11 +103,12 @@ export default async function EditGalleryPage({
         />
         {gallery.images.map((image, index) => (
           <GalleryPhotoUploader
-            key={index}
+            key={image.src}
             galleryId={gallery.id}
             field={`photo-${index}`}
             label={`Photo ${index + 1}`}
             initialSrc={image.src}
+            deleteIndex={index}
           />
         ))}
       </div>
