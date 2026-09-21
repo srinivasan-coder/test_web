@@ -1,8 +1,29 @@
+import type { SVGProps } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Images, Instagram, ChevronRight } from "lucide-react";
+import { Images, ChevronRight } from "lucide-react";
 import { adminSections } from "@/lib/admin-sections";
 import { resolveSingleImage } from "@/lib/site-images";
+
+// lucide-react dropped brand/logo icons (Instagram included) a while back
+// for trademark reasons — hand-drawn instead of importing a nonexistent export.
+function InstagramIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 // Thumbnails reflect data/db/site-images.json — read fresh every visit.
 export const dynamic = "force-dynamic";
@@ -25,7 +46,7 @@ const MANAGE_LINKS = [
     href: "/admin/manage/instagram",
     label: "Manage Instagram tiles",
     description: "Edit details, replace photos, or delete",
-    icon: Instagram,
+    icon: InstagramIcon,
   },
 ];
 
