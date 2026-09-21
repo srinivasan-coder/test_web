@@ -1,4 +1,5 @@
 import { readJsonDoc, writeJsonDoc } from "@/lib/json-store";
+import { NO_IMAGE_PLACEHOLDER } from "@/lib/upload-limits";
 
 import type { Gallery } from "@/types/gallery";
 import type { TeamMember } from "@/types/team";
@@ -64,14 +65,21 @@ export async function resolveServices(seed: Service[]): Promise<Service[]> {
   }));
 }
 
+/**
+ * Deleted (not just replaced) category tiles are dropped entirely — same
+ * as a deleted gallery or Instagram tile disappearing from its grid,
+ * instead of showing the empty-state placeholder in a fixed card layout.
+ */
 export async function resolvePortfolioCategories(
   seed: PortfolioCategory[],
 ): Promise<PortfolioCategory[]> {
   const overrides = await getImageOverrides();
-  return seed.map((c) => ({
-    ...c,
-    image: { ...c.image, src: resolve(overrides, "portfolio-categories", c.slug, c.image.src) },
-  }));
+  return seed
+    .map((c) => ({
+      ...c,
+      image: { ...c.image, src: resolve(overrides, "portfolio-categories", c.slug, c.image.src) },
+    }))
+    .filter((c) => c.image.src !== NO_IMAGE_PLACEHOLDER);
 }
 
 export async function resolveStudioStory(seed: StudioStory): Promise<StudioStory> {

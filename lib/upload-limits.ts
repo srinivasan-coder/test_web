@@ -16,3 +16,10 @@ export const VIDEO_FORMAT_BY_MIME: Record<string, string> = {
   "video/webm": "webm",
   "video/quicktime": "mov",
 };
+
+/**
+ * Set on a Sections image slot by the admin "delete" action. Lives here
+ * (not lib/site-images.ts) so client components can import it without
+ * pulling in that module's server-only Firebase Admin dependency.
+ */
+export const NO_IMAGE_PLACEHOLDER = "/assets/no-image.svg";

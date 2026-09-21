@@ -5,7 +5,7 @@ import Image from "next/image";
 import type { AdminSlot } from "@/lib/admin-sections";
 import { Button } from "@/components/ui/button";
 import { uploadDirectToCloudinary, type SignedUpload } from "@/lib/cloudinary-client-upload";
-import { MAX_UPLOAD_BYTES, MAX_UPLOAD_LABEL } from "@/lib/upload-limits";
+import { MAX_UPLOAD_BYTES, MAX_UPLOAD_LABEL, NO_IMAGE_PLACEHOLDER } from "@/lib/upload-limits";
 
 export function SlotUploader({
   section,
@@ -86,7 +86,7 @@ export function SlotUploader({
 
     setDeleting(false);
     setConfirmingDelete(false);
-    setSrc("/assets/no-image.svg");
+    setSrc(NO_IMAGE_PLACEHOLDER);
     setPreviewVersion((v) => v + 1);
   }
 
