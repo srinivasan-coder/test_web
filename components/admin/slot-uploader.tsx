@@ -110,7 +110,7 @@ export function SlotUploader({
         {!confirmingDelete && (
           <button
             type="button"
-            aria-label={`Reset ${slot.label} to default`}
+            aria-label={`Delete ${slot.label}`}
             onClick={() => setConfirmingDelete(true)}
             className="absolute right-2 top-2 flex size-8 items-center justify-center rounded-full bg-ink/60 text-white backdrop-blur transition-colors hover:bg-destructive"
           >
@@ -133,7 +133,9 @@ export function SlotUploader({
         )}
         {confirmingDelete && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink/85 p-4 text-center backdrop-blur-sm">
-            <p className="text-xs text-white">Reset to the default image? This can&apos;t be undone.</p>
+            <p className="text-xs text-white">
+              Delete this image? It resets to the default. This can&apos;t be undone.
+            </p>
             <div className="flex w-full gap-2 px-2">
               <Button
                 type="button"
@@ -152,7 +154,7 @@ export function SlotUploader({
                 onClick={handleDelete}
                 disabled={deleting}
               >
-                {deleting ? "Resetting…" : "Reset"}
+                {deleting ? "Deleting…" : "Delete"}
               </Button>
             </div>
           </div>
