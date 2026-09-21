@@ -39,6 +39,13 @@ export async function setImageOverride(section: string, slotId: string, filePath
   await writeJsonDoc(MANIFEST_PATHNAME, overrides);
 }
 
+/** Reverts a slot back to its shipped default asset by dropping its override. */
+export async function clearImageOverride(section: string, slotId: string): Promise<void> {
+  const overrides = await readOverrides();
+  delete overrides[key(section, slotId)];
+  await writeJsonDoc(MANIFEST_PATHNAME, overrides);
+}
+
 /** Resolves a single fixed-slot image (hero, cta, about studio story). */
 export async function resolveSingleImage(
   section: string,

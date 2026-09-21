@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getAllGalleries } from "@/lib/content-store";
-import { DeleteGalleryButton } from "@/components/admin/delete-gallery-button";
 
 // Overrides/added galleries live in Firestore — read fresh every visit.
 export const dynamic = "force-dynamic";
@@ -16,7 +15,7 @@ export default async function ManageGalleriesPage() {
       </Link>
       <h1 className="mt-2 text-2xl font-semibold text-foreground">Manage galleries</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Edit a gallery&apos;s details and photos, or remove it from the portfolio.
+        Edit a gallery&apos;s details and photos.
       </p>
 
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -34,7 +33,6 @@ export default async function ManageGalleriesPage() {
                 className="object-cover"
                 unoptimized
               />
-              <DeleteGalleryButton id={gallery.id} title={gallery.title} />
             </div>
             <div className="p-4">
               <p className="text-sm font-medium text-foreground">{gallery.title}</p>
