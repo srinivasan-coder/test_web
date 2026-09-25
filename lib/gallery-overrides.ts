@@ -1,7 +1,15 @@
 import { readJsonDoc, writeJsonDoc } from "@/lib/json-store";
-import type { Gallery } from "@/types/gallery";
+import type { Gallery, GalleryOrientation } from "@/types/gallery";
 
 const OVERRIDES_PATHNAME = "data-db/gallery-overrides.json";
+
+/** Default photo dimensions per orientation — used both when a gallery is
+ * first created and when a photo is appended to an existing one later. */
+export const GALLERY_ORIENTATION_DIMENSIONS: Record<GalleryOrientation, [number, number]> = {
+  portrait: [1200, 1500],
+  landscape: [1600, 1067],
+  square: [1200, 1200],
+};
 
 /**
  * A partial patch applied on top of a gallery (seed or added) at read time —

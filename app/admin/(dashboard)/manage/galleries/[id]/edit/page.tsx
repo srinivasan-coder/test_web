@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getGalleryByIdAsync } from "@/lib/content-store";
 import { EditContentForm } from "@/components/admin/edit-content-form";
 import { GalleryPhotoUploader } from "@/components/admin/gallery-photo-uploader";
+import { AddGalleryPhoto } from "@/components/admin/add-gallery-photo";
 import { Field } from "@/components/admin/add-content-form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -92,7 +93,8 @@ export default async function EditGalleryPage({
 
       <h2 className="mt-12 text-lg font-semibold text-foreground">Photos</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Replace the cover or any photo below — each uploads and saves on its own.
+        Replace the cover or any photo below, or add a new one — each uploads and saves on its
+        own.
       </p>
       <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <GalleryPhotoUploader
@@ -111,6 +113,7 @@ export default async function EditGalleryPage({
             deleteIndex={index}
           />
         ))}
+        <AddGalleryPhoto galleryId={gallery.id} />
       </div>
     </div>
   );

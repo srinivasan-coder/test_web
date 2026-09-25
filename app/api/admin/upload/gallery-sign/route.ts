@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   if (!gallery) {
     return NextResponse.json({ error: "Gallery not found" }, { status: 404 });
   }
-  if (field !== "cover" && !/^photo-\d+$/.test(field)) {
+  if (field !== "cover" && field !== "photo-new" && !/^photo-\d+$/.test(field)) {
     return NextResponse.json({ error: "Invalid field" }, { status: 400 });
   }
 

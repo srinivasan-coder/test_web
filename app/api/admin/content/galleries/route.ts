@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { addGallery, getGallerySlugs, slugify } from "@/lib/content-store";
 import { saveUploadedImage, parseTags, todayISO, UploadValidationError } from "@/lib/admin-upload";
+import { GALLERY_ORIENTATION_DIMENSIONS as DIMENSIONS } from "@/lib/gallery-overrides";
 import type { Gallery, GalleryCategory, GalleryOrientation } from "@/types/gallery";
 
 export const runtime = "nodejs";
@@ -15,11 +16,6 @@ const CATEGORIES: GalleryCategory[] = [
   "fashion",
 ];
 const ORIENTATIONS: GalleryOrientation[] = ["portrait", "landscape", "square"];
-const DIMENSIONS: Record<GalleryOrientation, [number, number]> = {
-  portrait: [1200, 1500],
-  landscape: [1600, 1067],
-  square: [1200, 1200],
-};
 
 export async function POST(request: Request) {
   const formData = await request.formData();

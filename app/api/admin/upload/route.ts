@@ -7,7 +7,7 @@ import {
 } from "@/lib/content-store";
 import { enforceUploadedSize, UploadValidationError } from "@/lib/admin-upload";
 import { setImageOverride } from "@/lib/site-images";
-import { setGalleryOverride } from "@/lib/gallery-overrides";
+import { setGalleryOverride, GALLERY_ORIENTATION_DIMENSIONS } from "@/lib/gallery-overrides";
 import { setInstagramOverride } from "@/lib/instagram-overrides";
 import { setVideoTestimonialOverride } from "@/lib/video-testimonial-overrides";
 
@@ -96,6 +96,10 @@ export async function POST(request: Request) {
 
     if (field === "cover") {
       await setGalleryOverride(galleryId, { cover: { ...gallery.cover, src: url } });
+    } else if (field === "photo-new") {
+      const [width, height] = GALLERY_ORIENTATION_DIMENSIONS[gallery.orientation];
+      const images = [...gallery.images, { src: url, alt: gallery.title, width, height }];
+      await setGalleryOverride(galleryId, { images });
     } else {
       const match = /^photo-(\d+)$/.exec(field);
       const index = match ? Number(match[1]) : -1;
