@@ -29,7 +29,11 @@ interface GalleryGridProps {
  * to column 2 and can leave one column noticeably shorter than the rest.
  */
 export function GalleryGrid({ galleries, className }: GalleryGridProps) {
-  const [index, setIndex] = React.useState(-1);
+  // Which gallery's own photo set is open, and which photo within it —
+  // not a flat index into `galleries`, so next/prev stays inside that one
+  // gallery's cover + images instead of jumping to a different project.
+  const [activeGalleryId, setActiveGalleryId] = React.useState<string | null>(null);
+  const [slideIndex, setSlideIndex] = React.useState(0);
   const reduceMotion = useReducedMotion();
 
   const isLg = useMediaQuery("(min-width: 1024px)");
@@ -41,20 +45,25 @@ export function GalleryGrid({ galleries, className }: GalleryGridProps) {
     [galleries, columnCount],
   );
 
-  const slides: LightboxSlide[] = React.useMemo(
-    () =>
-      galleries.map((gallery) => ({
-        src: gallery.cover.src,
-        alt: gallery.cover.alt,
-        width: gallery.cover.width,
-        height: gallery.cover.height,
-        title: gallery.title,
-        description: [gallery.location, gallery.category.replace("-", " ")]
-          .filter(Boolean)
-          .join(" · "),
-      })),
-    [galleries],
+  const activeGallery = React.useMemo(
+    () => galleries.find((g) => g.id === activeGalleryId) ?? null,
+    [galleries, activeGalleryId],
   );
+
+  const slides: LightboxSlide[] = React.useMemo(() => {
+    if (!activeGallery) return [];
+    const description = [activeGallery.location, activeGallery.category.replace("-", " ")]
+      .filter(Boolean)
+      .join(" · ");
+    return [activeGallery.cover, ...activeGallery.images].map((image) => ({
+      src: image.src,
+      alt: image.alt,
+      width: image.width,
+      height: image.height,
+      title: activeGallery.title,
+      description,
+    }));
+  }, [activeGallery]);
 
   return (
     <>
@@ -74,7 +83,10 @@ export function GalleryGrid({ galleries, className }: GalleryGridProps) {
                 <GalleryCard
                   key={gallery.id}
                   gallery={gallery}
-                  onView={() => setIndex(itemIndex)}
+                  onView={() => {
+                    setActiveGalleryId(gallery.id);
+                    setSlideIndex(0);
+                  }}
                   priority={itemIndex < 3}
                   index={itemIndex}
                 />
@@ -84,13 +96,13 @@ export function GalleryGrid({ galleries, className }: GalleryGridProps) {
         ))}
       </motion.div>
 
-      {index >= 0 ? (
+      {activeGallery ? (
         <Lightbox
           open
-          index={index}
+          index={slideIndex}
           slides={slides}
-          onClose={() => setIndex(-1)}
-          onIndexChange={setIndex}
+          onClose={() => setActiveGalleryId(null)}
+          onIndexChange={setSlideIndex}
         />
       ) : null}
     </>
