@@ -2,7 +2,7 @@ import { readJsonDoc, writeJsonDoc } from "@/lib/json-store";
 
 import { galleries as seedGalleries } from "@/data/gallery";
 import { team as seedTeam } from "@/data/team";
-import { reviews as seedReviews } from "@/data/reviews";
+import { reviews as seedReviews, videoTestimonials as seedVideoTestimonials } from "@/data/reviews";
 import { instagramPosts as seedInstagramPosts } from "@/data/instagram";
 import {
   getImageOverrides,
@@ -10,12 +10,14 @@ import {
   resolveTeamSeedWith,
   resolveReviewSeedWith,
   resolveInstagramSeedWith,
+  resolveVideoTestimonials,
 } from "@/lib/site-images";
 import { getGalleryOverrides } from "@/lib/gallery-overrides";
 import { getInstagramOverrides } from "@/lib/instagram-overrides";
+import { getVideoTestimonialOverrides } from "@/lib/video-testimonial-overrides";
 import type { Gallery, GalleryCategory } from "@/types/gallery";
 import type { TeamMember } from "@/types/team";
-import type { Review } from "@/types/review";
+import type { Review, VideoTestimonial } from "@/types/review";
 import type { InstagramPost } from "@/types/instagram";
 
 async function readStore<T>(file: string): Promise<T[]> {
@@ -157,4 +159,33 @@ export async function getInstagramIds(): Promise<Set<string>> {
 
 export async function addInstagramPost(post: InstagramPost): Promise<void> {
   await appendToStore("instagram.json", post);
+}
+
+// --- Video Testimonials -------------------------------------------------
+
+export async function getAllVideoTestimonials(): Promise<VideoTestimonial[]> {
+  const [seedResolved, vtOverrides, added] = await Promise.all([
+    resolveVideoTestimonials(seedVideoTestimonials),
+    getVideoTestimonialOverrides(),
+    readStore<VideoTestimonial>("video-testimonials.json"),
+  ]);
+  const merged: Array<VideoTestimonial & { hidden?: boolean }> = [...seedResolved, ...added].map(
+    (vt) => {
+      const patch = vtOverrides[vt.id];
+      return patch ? { ...vt, ...patch } : vt;
+    },
+  );
+  return merged.filter((vt) => !vt.hidden);
+}
+
+export async function getVideoTestimonialByIdAsync(id: string): Promise<VideoTestimonial | undefined> {
+  return (await getAllVideoTestimonials()).find((vt) => vt.id === id);
+}
+
+export async function getVideoTestimonialIds(): Promise<Set<string>> {
+  return new Set((await getAllVideoTestimonials()).map((vt) => vt.id));
+}
+
+export async function addVideoTestimonial(testimonial: VideoTestimonial): Promise<void> {
+  await appendToStore("video-testimonials.json", testimonial);
 }

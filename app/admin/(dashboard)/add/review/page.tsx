@@ -66,10 +66,15 @@ export default function AddReviewPage() {
             </Field>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Field label="Source">
-              <Select name="source" defaultValue="studio">
-                <option value="studio">Studio</option>
+            <Field label="Source" required>
+              <Select name="source" required defaultValue="">
+                <option value="" disabled>
+                  Choose…
+                </option>
                 <option value="google">Google</option>
+                <option value="instagram">Instagram</option>
+                <option value="facebook">Facebook</option>
+                <option value="referral">Friend Referral</option>
               </Select>
             </Field>
             <Field label="Related service slug" hint="Optional, e.g. wedding">
@@ -81,12 +86,6 @@ export default function AddReviewPage() {
               <input type="checkbox" name="featured" className="size-4" />
               Featured
             </label>
-          </Field>
-          <Field label="Avatar" hint="Optional">
-            <Input type="file" name="avatar" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" />
-          </Field>
-          <Field label="Story cover photo" hint="Optional — only needed if you added a story">
-            <Input type="file" name="cover" accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp" />
           </Field>
         </AddContentForm>
       </div>

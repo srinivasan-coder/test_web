@@ -4,9 +4,8 @@ import nextDynamic from "next/dynamic";
 import { PageHeader } from "@/components/ui/page-header";
 import { CallToAction } from "@/components/sections/cta";
 import { OverallRating, ClientStatistics } from "@/components/reviews";
-import { videoTestimonials as seedVideoTestimonials, reviewStats } from "@/data/reviews";
-import { getAllReviews } from "@/lib/content-store";
-import { resolveVideoTestimonials } from "@/lib/site-images";
+import { reviewStats } from "@/data/reviews";
+import { getAllReviews, getAllVideoTestimonials } from "@/lib/content-store";
 import { getRatingSummary } from "@/lib/reviews";
 import { SITE_CONFIG } from "@/lib/constants";
 import { buildMetadata } from "@/lib/seo";
@@ -45,7 +44,7 @@ const VideoTestimonials = nextDynamic(
 export default async function ReviewsPage() {
   const [reviews, videoTestimonials] = await Promise.all([
     getAllReviews(),
-    resolveVideoTestimonials(seedVideoTestimonials),
+    getAllVideoTestimonials(),
   ]);
   const summary = getRatingSummary(reviews);
 

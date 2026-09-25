@@ -12,7 +12,7 @@ export type ReviewCategory =
 
 export type ReviewFilter = "all" | ReviewCategory;
 
-export type ReviewSource = "google" | "studio";
+export type ReviewSource = "google" | "instagram" | "facebook" | "referral";
 
 /**
  * A client testimonial / review.

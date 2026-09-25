@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Images, ChevronRight } from "lucide-react";
+import { Images, Film, ChevronRight } from "lucide-react";
 import { adminSections } from "@/lib/admin-sections";
 import { resolveSingleImage } from "@/lib/site-images";
 
@@ -33,6 +33,11 @@ const ADD_NEW_LINKS = [
   { href: "/admin/add/team", label: "Add team member", description: "New person on About" },
   { href: "/admin/add/review", label: "Add review", description: "New client testimonial" },
   { href: "/admin/add/instagram", label: "Add Instagram tile", description: "New feed photo" },
+  {
+    href: "/admin/add/video-testimonial",
+    label: "Add video testimonial",
+    description: "New client video",
+  },
 ];
 
 const MANAGE_LINKS = [
@@ -48,6 +53,12 @@ const MANAGE_LINKS = [
     description: "Edit details, replace photos, or delete",
     icon: InstagramIcon,
   },
+  {
+    href: "/admin/manage/video-testimonials",
+    label: "Manage video testimonials",
+    description: "Edit details, replace poster/video, or delete",
+    icon: Film,
+  },
 ];
 
 export default async function AdminDashboardPage() {
@@ -61,8 +72,8 @@ export default async function AdminDashboardPage() {
     <div>
       <h1 className="text-2xl font-semibold text-foreground">Add new content</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Create a brand-new gallery, team member, review, or Instagram tile — live
-        immediately, no rebuild needed.
+        Create a brand-new gallery, team member, review, Instagram tile, or video
+        testimonial — live immediately, no rebuild needed.
       </p>
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -80,7 +91,8 @@ export default async function AdminDashboardPage() {
 
       <h2 className="mt-12 text-2xl font-semibold text-foreground">Manage content</h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Edit or remove galleries and Instagram tiles you&apos;ve already added or replaced.
+        Edit or remove galleries, Instagram tiles, and video testimonials you&apos;ve already
+        added or replaced.
       </p>
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {MANAGE_LINKS.map((item) => (

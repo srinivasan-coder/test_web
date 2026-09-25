@@ -1,4 +1,4 @@
-import type { Review, ReviewCategory, ReviewFilter, RatingSummary } from "@/types";
+import type { Review, ReviewCategory, ReviewFilter, ReviewSource, RatingSummary } from "@/types";
 
 export const REVIEW_FILTERS: { value: ReviewFilter; label: string }[] = [
   { value: "all", label: "All" },
@@ -21,6 +21,18 @@ export const REVIEW_CATEGORY_LABELS: Record<ReviewCategory, string> = {
 
 export function getReviewCategoryLabel(category: ReviewCategory): string {
   return REVIEW_CATEGORY_LABELS[category];
+}
+
+export const REVIEW_SOURCE_LABELS: Record<ReviewSource, string> = {
+  google: "Posted on Google",
+  instagram: "Posted on Instagram",
+  facebook: "Posted on Facebook",
+  referral: "Friend referral",
+};
+
+/** Reviews added before a source was required have none set — reads as a studio-collected review. */
+export function getReviewSourceLabel(source: ReviewSource | undefined): string {
+  return source ? REVIEW_SOURCE_LABELS[source] : "Studio review";
 }
 
 export function filterReviews(

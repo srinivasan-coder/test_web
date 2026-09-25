@@ -14,7 +14,7 @@ const CATEGORIES: ReviewCategory[] = [
   "corporate",
   "birthday",
 ];
-const SOURCES: ReviewSource[] = ["google", "studio"];
+const SOURCES: ReviewSource[] = ["google", "instagram", "facebook", "referral"];
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -22,6 +22,7 @@ export async function POST(request: Request) {
   const quote = String(formData.get("quote") ?? "").trim();
   const category = String(formData.get("category") ?? "") as ReviewCategory;
   const rating = Number(formData.get("rating"));
+  const source = String(formData.get("source") ?? "") as ReviewSource;
 
   if (!author || !quote) {
     return NextResponse.json({ error: "Author and quote are required" }, { status: 400 });
@@ -31,6 +32,9 @@ export async function POST(request: Request) {
   }
   if (![1, 2, 3, 4, 5].includes(rating)) {
     return NextResponse.json({ error: "Rating must be between 1 and 5" }, { status: 400 });
+  }
+  if (!SOURCES.includes(source)) {
+    return NextResponse.json({ error: "Please select a source" }, { status: 400 });
   }
 
   const takenIds = await getReviewIds();
@@ -50,8 +54,6 @@ export async function POST(request: Request) {
         ? await saveUploadedImage(coverFile, `reviews/covers/${slug}.jpg`)
         : undefined;
 
-    const source = String(formData.get("source") ?? "studio") as ReviewSource;
-
     const review: Review = {
       id,
       author,
@@ -62,7 +64,7 @@ export async function POST(request: Request) {
       quote,
       date: String(formData.get("date") ?? "").trim() || todayISO(),
       category,
-      source: SOURCES.includes(source) ? source : "studio",
+      source,
       serviceSlug: String(formData.get("serviceSlug") ?? "").trim() || undefined,
       featured: formData.get("featured") === "on",
       story: String(formData.get("story") ?? "").trim() || undefined,

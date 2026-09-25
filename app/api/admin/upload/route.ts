@@ -1,10 +1,15 @@
 import { NextResponse } from "next/server";
 import { getSlot } from "@/lib/admin-sections";
-import { getGalleryByIdAsync, getInstagramPostByIdAsync } from "@/lib/content-store";
+import {
+  getGalleryByIdAsync,
+  getInstagramPostByIdAsync,
+  getVideoTestimonialByIdAsync,
+} from "@/lib/content-store";
 import { enforceUploadedSize, UploadValidationError } from "@/lib/admin-upload";
 import { setImageOverride } from "@/lib/site-images";
 import { setGalleryOverride } from "@/lib/gallery-overrides";
 import { setInstagramOverride } from "@/lib/instagram-overrides";
+import { setVideoTestimonialOverride } from "@/lib/video-testimonial-overrides";
 
 export const runtime = "nodejs";
 
@@ -21,10 +26,37 @@ export async function POST(request: Request) {
   const publicId = String(body?.publicId ?? "");
   const galleryId = body?.galleryId ? String(body.galleryId) : undefined;
   const instagramId = body?.instagramId ? String(body.instagramId) : undefined;
+  const videoTestimonialId = body?.videoTestimonialId ? String(body.videoTestimonialId) : undefined;
 
   const expectedPrefix = `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`;
   if (!url.startsWith(expectedPrefix)) {
     return NextResponse.json({ error: "Invalid upload URL" }, { status: 400 });
+  }
+
+  if (videoTestimonialId) {
+    const field = String(body?.field ?? "");
+    const testimonial = await getVideoTestimonialByIdAsync(videoTestimonialId);
+    if (!testimonial) {
+      return NextResponse.json({ error: "Video testimonial not found" }, { status: 404 });
+    }
+    if (field !== "poster" && field !== "video") {
+      return NextResponse.json({ error: "Invalid field" }, { status: 400 });
+    }
+
+    try {
+      await enforceUploadedSize(publicId, field === "video" ? "video" : "image");
+    } catch (err) {
+      if (err instanceof UploadValidationError) {
+        return NextResponse.json({ error: err.message }, { status: 400 });
+      }
+      throw err;
+    }
+
+    await setVideoTestimonialOverride(
+      videoTestimonialId,
+      field === "poster" ? { poster: url } : { videoUrl: url },
+    );
+    return NextResponse.json({ ok: true, path: url, updatedAt: Date.now() });
   }
 
   if (instagramId) {

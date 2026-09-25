@@ -14,14 +14,14 @@ export type AdminSection = {
   slots: AdminSlot[];
 };
 
-// Per-gallery image slots and the Instagram Feed Preview grid used to live
-// here (one AdminSection per seed gallery, e.g. "Gallery — A Still
-// Morning", plus 6 "ig-N" tiles). Both are now handled by Manage Galleries
-// (/admin/manage/galleries) and Manage Instagram tiles
-// (/admin/manage/instagram), which also cover text fields and added (not
-// just seed) items — see lib/gallery-overrides.ts and
-// lib/instagram-overrides.ts. Keeping both systems would let them silently
-// shadow each other's edits.
+// Per-gallery image slots, the Instagram Feed Preview grid, and the Video
+// Testimonials poster/video slots used to live here. All three are now
+// handled by their own Manage pages (/admin/manage/galleries,
+// /admin/manage/instagram, /admin/manage/video-testimonials), which also
+// cover text fields and added (not just seed) items — see
+// lib/gallery-overrides.ts, lib/instagram-overrides.ts, and
+// lib/video-testimonial-overrides.ts. Keeping both systems would let them
+// silently shadow each other's edits.
 export const adminSections: AdminSection[] = [
   {
     slug: "hero",
@@ -76,37 +76,6 @@ export const adminSections: AdminSection[] = [
       { id: "pre-wedding", label: "Pre Wedding", path: "portfolio-categories/pre-wedding.jpg" },
       { id: "baby", label: "Baby", path: "portfolio-categories/baby.jpg" },
       { id: "maternity", label: "Babyshower / Maternity", path: "portfolio-categories/maternity.jpg" },
-    ],
-  },
-  {
-    slug: "reviews",
-    title: "Reviews",
-    description: "Reviewer avatars and story cover photos.",
-    slots: [
-      { id: "avatar-r-1", label: "Ella Mercer — avatar", path: "reviews/avatars/r-1.jpg" },
-      { id: "avatar-r-2", label: "Daniel Kim — avatar", path: "reviews/avatars/r-2.jpg" },
-      { id: "avatar-r-3", label: "Hannah Cole — avatar", path: "reviews/avatars/r-3.jpg" },
-      { id: "avatar-r-5", label: "Priya & Arjun Shah — avatar", path: "reviews/avatars/r-5.jpg" },
-      { id: "avatar-r-9", label: "Maya Chen — avatar", path: "reviews/avatars/r-9.jpg" },
-      { id: "cover-r-1", label: "Ella Mercer — story cover", path: "reviews/covers/r-1.jpg" },
-      { id: "cover-r-2", label: "Daniel Kim — story cover", path: "reviews/covers/r-2.jpg" },
-      { id: "cover-r-3", label: "Hannah Cole — story cover", path: "reviews/covers/r-3.jpg" },
-      { id: "cover-r-9", label: "Maya Chen — story cover", path: "reviews/covers/r-9.jpg" },
-    ],
-  },
-  {
-    slug: "video-testimonials",
-    title: "Video Testimonials",
-    description: "Poster frame and video file for each testimonial.",
-    slots: [
-      { id: "vt-1", label: "Ella & James — Wedding Film (poster)", path: "video-testimonials/vt-1.jpg" },
-      { id: "vt-1-video", label: "Ella & James — Wedding Film (video)", path: "video-testimonials/vt-1.mp4", kind: "video" },
-      { id: "vt-2", label: "Maison Noir — Brand Stories (poster)", path: "video-testimonials/vt-2.jpg" },
-      { id: "vt-2-video", label: "Maison Noir — Brand Stories (video)", path: "video-testimonials/vt-2.mp4", kind: "video" },
-      { id: "vt-3", label: "First Light — Baby Session (poster)", path: "video-testimonials/vt-3.jpg" },
-      { id: "vt-3-video", label: "First Light — Baby Session (video)", path: "video-testimonials/vt-3.mp4", kind: "video" },
-      { id: "vt-4", label: "Turning One — Birthday Recap (poster)", path: "video-testimonials/vt-4.jpg" },
-      { id: "vt-4-video", label: "Turning One — Birthday Recap (video)", path: "video-testimonials/vt-4.mp4", kind: "video" },
     ],
   },
 ];

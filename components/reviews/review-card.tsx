@@ -7,6 +7,7 @@ import { cn, formatDate } from "@/lib/utils";
 import {
   getInitials,
   getReviewCategoryLabel,
+  getReviewSourceLabel,
 } from "@/lib/reviews";
 import { EASE_OUT_SOFT } from "@/lib/animations";
 import type { Review } from "@/types";
@@ -86,9 +87,7 @@ export function ReviewCard({ review, className, index = 0 }: ReviewCardProps) {
       </blockquote>
 
       <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-xs text-muted-foreground">
-        <span>
-          {review.source === "google" ? "Posted on Google" : "Studio review"}
-        </span>
+        <span>{getReviewSourceLabel(review.source)}</span>
         {review.location ? <span>{review.location}</span> : null}
       </div>
     </motion.article>
